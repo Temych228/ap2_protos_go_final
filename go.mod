@@ -1,6 +1,6 @@
 module github.com/Temych228/ap2_protos_go_final
 
-go 1.25.0
+go 1.26.2
 
 require (
 	google.golang.org/grpc v1.81.0
