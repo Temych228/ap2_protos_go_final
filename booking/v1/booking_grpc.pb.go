@@ -19,33 +19,48 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_CreateBooking_FullMethodName   = "/booking.v1.BookingService/CreateBooking"
-	BookingService_GetBooking_FullMethodName      = "/booking.v1.BookingService/GetBooking"
-	BookingService_ListBookings_FullMethodName    = "/booking.v1.BookingService/ListBookings"
-	BookingService_ConfirmBooking_FullMethodName  = "/booking.v1.BookingService/ConfirmBooking"
-	BookingService_CancelBooking_FullMethodName   = "/booking.v1.BookingService/CancelBooking"
-	BookingService_StartBooking_FullMethodName    = "/booking.v1.BookingService/StartBooking"
-	BookingService_CompleteBooking_FullMethodName = "/booking.v1.BookingService/CompleteBooking"
+	BookingService_CreateBooking_FullMethodName          = "/booking.v1.BookingService/CreateBooking"
+	BookingService_GetBooking_FullMethodName             = "/booking.v1.BookingService/GetBooking"
+	BookingService_ListBookings_FullMethodName           = "/booking.v1.BookingService/ListBookings"
+	BookingService_UpdateBooking_FullMethodName          = "/booking.v1.BookingService/UpdateBooking"
+	BookingService_DeleteBooking_FullMethodName          = "/booking.v1.BookingService/DeleteBooking"
+	BookingService_ConfirmBooking_FullMethodName         = "/booking.v1.BookingService/ConfirmBooking"
+	BookingService_CancelBooking_FullMethodName          = "/booking.v1.BookingService/CancelBooking"
+	BookingService_StartBooking_FullMethodName           = "/booking.v1.BookingService/StartBooking"
+	BookingService_CompleteBooking_FullMethodName        = "/booking.v1.BookingService/CompleteBooking"
+	BookingService_ExtendBooking_FullMethodName          = "/booking.v1.BookingService/ExtendBooking"
+	BookingService_GetActiveBookingByUser_FullMethodName = "/booking.v1.BookingService/GetActiveBookingByUser"
+	BookingService_CheckAvailability_FullMethodName      = "/booking.v1.BookingService/CheckAvailability"
 )
 
 // BookingServiceClient is the client API for BookingService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BookingServiceClient interface {
-	// Create a new booking
+	// 1
 	CreateBooking(ctx context.Context, in *CreateBookingRequest, opts ...grpc.CallOption) (*CreateBookingResponse, error)
-	// Get booking by id
+	// 2
 	GetBooking(ctx context.Context, in *GetBookingRequest, opts ...grpc.CallOption) (*GetBookingResponse, error)
-	// List bookings with filters
+	// 3
 	ListBookings(ctx context.Context, in *ListBookingsRequest, opts ...grpc.CallOption) (*ListBookingsResponse, error)
-	// Confirm booking
+	// 4
+	UpdateBooking(ctx context.Context, in *UpdateBookingRequest, opts ...grpc.CallOption) (*UpdateBookingResponse, error)
+	// 5
+	DeleteBooking(ctx context.Context, in *DeleteBookingRequest, opts ...grpc.CallOption) (*DeleteBookingResponse, error)
+	// 6
 	ConfirmBooking(ctx context.Context, in *ConfirmBookingRequest, opts ...grpc.CallOption) (*ConfirmBookingResponse, error)
-	// Cancel booking
+	// 7
 	CancelBooking(ctx context.Context, in *CancelBookingRequest, opts ...grpc.CallOption) (*CancelBookingResponse, error)
-	// Start booking (user arrived / parking started)
+	// 8
 	StartBooking(ctx context.Context, in *StartBookingRequest, opts ...grpc.CallOption) (*StartBookingResponse, error)
-	// Complete booking (finish parking session)
+	// 9
 	CompleteBooking(ctx context.Context, in *CompleteBookingRequest, opts ...grpc.CallOption) (*CompleteBookingResponse, error)
+	// 10
+	ExtendBooking(ctx context.Context, in *ExtendBookingRequest, opts ...grpc.CallOption) (*ExtendBookingResponse, error)
+	// 11
+	GetActiveBookingByUser(ctx context.Context, in *GetActiveBookingByUserRequest, opts ...grpc.CallOption) (*GetActiveBookingByUserResponse, error)
+	// 12
+	CheckAvailability(ctx context.Context, in *CheckAvailabilityRequest, opts ...grpc.CallOption) (*CheckAvailabilityResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -80,6 +95,26 @@ func (c *bookingServiceClient) ListBookings(ctx context.Context, in *ListBooking
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListBookingsResponse)
 	err := c.cc.Invoke(ctx, BookingService_ListBookings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookingServiceClient) UpdateBooking(ctx context.Context, in *UpdateBookingRequest, opts ...grpc.CallOption) (*UpdateBookingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateBookingResponse)
+	err := c.cc.Invoke(ctx, BookingService_UpdateBooking_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookingServiceClient) DeleteBooking(ctx context.Context, in *DeleteBookingRequest, opts ...grpc.CallOption) (*DeleteBookingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteBookingResponse)
+	err := c.cc.Invoke(ctx, BookingService_DeleteBooking_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -126,24 +161,64 @@ func (c *bookingServiceClient) CompleteBooking(ctx context.Context, in *Complete
 	return out, nil
 }
 
+func (c *bookingServiceClient) ExtendBooking(ctx context.Context, in *ExtendBookingRequest, opts ...grpc.CallOption) (*ExtendBookingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExtendBookingResponse)
+	err := c.cc.Invoke(ctx, BookingService_ExtendBooking_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookingServiceClient) GetActiveBookingByUser(ctx context.Context, in *GetActiveBookingByUserRequest, opts ...grpc.CallOption) (*GetActiveBookingByUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetActiveBookingByUserResponse)
+	err := c.cc.Invoke(ctx, BookingService_GetActiveBookingByUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookingServiceClient) CheckAvailability(ctx context.Context, in *CheckAvailabilityRequest, opts ...grpc.CallOption) (*CheckAvailabilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckAvailabilityResponse)
+	err := c.cc.Invoke(ctx, BookingService_CheckAvailability_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BookingServiceServer is the server API for BookingService service.
 // All implementations should embed UnimplementedBookingServiceServer
 // for forward compatibility.
 type BookingServiceServer interface {
-	// Create a new booking
+	// 1
 	CreateBooking(context.Context, *CreateBookingRequest) (*CreateBookingResponse, error)
-	// Get booking by id
+	// 2
 	GetBooking(context.Context, *GetBookingRequest) (*GetBookingResponse, error)
-	// List bookings with filters
+	// 3
 	ListBookings(context.Context, *ListBookingsRequest) (*ListBookingsResponse, error)
-	// Confirm booking
+	// 4
+	UpdateBooking(context.Context, *UpdateBookingRequest) (*UpdateBookingResponse, error)
+	// 5
+	DeleteBooking(context.Context, *DeleteBookingRequest) (*DeleteBookingResponse, error)
+	// 6
 	ConfirmBooking(context.Context, *ConfirmBookingRequest) (*ConfirmBookingResponse, error)
-	// Cancel booking
+	// 7
 	CancelBooking(context.Context, *CancelBookingRequest) (*CancelBookingResponse, error)
-	// Start booking (user arrived / parking started)
+	// 8
 	StartBooking(context.Context, *StartBookingRequest) (*StartBookingResponse, error)
-	// Complete booking (finish parking session)
+	// 9
 	CompleteBooking(context.Context, *CompleteBookingRequest) (*CompleteBookingResponse, error)
+	// 10
+	ExtendBooking(context.Context, *ExtendBookingRequest) (*ExtendBookingResponse, error)
+	// 11
+	GetActiveBookingByUser(context.Context, *GetActiveBookingByUserRequest) (*GetActiveBookingByUserResponse, error)
+	// 12
+	CheckAvailability(context.Context, *CheckAvailabilityRequest) (*CheckAvailabilityResponse, error)
 }
 
 // UnimplementedBookingServiceServer should be embedded to have
@@ -162,6 +237,12 @@ func (UnimplementedBookingServiceServer) GetBooking(context.Context, *GetBooking
 func (UnimplementedBookingServiceServer) ListBookings(context.Context, *ListBookingsRequest) (*ListBookingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBookings not implemented")
 }
+func (UnimplementedBookingServiceServer) UpdateBooking(context.Context, *UpdateBookingRequest) (*UpdateBookingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateBooking not implemented")
+}
+func (UnimplementedBookingServiceServer) DeleteBooking(context.Context, *DeleteBookingRequest) (*DeleteBookingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteBooking not implemented")
+}
 func (UnimplementedBookingServiceServer) ConfirmBooking(context.Context, *ConfirmBookingRequest) (*ConfirmBookingResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ConfirmBooking not implemented")
 }
@@ -173,6 +254,15 @@ func (UnimplementedBookingServiceServer) StartBooking(context.Context, *StartBoo
 }
 func (UnimplementedBookingServiceServer) CompleteBooking(context.Context, *CompleteBookingRequest) (*CompleteBookingResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CompleteBooking not implemented")
+}
+func (UnimplementedBookingServiceServer) ExtendBooking(context.Context, *ExtendBookingRequest) (*ExtendBookingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExtendBooking not implemented")
+}
+func (UnimplementedBookingServiceServer) GetActiveBookingByUser(context.Context, *GetActiveBookingByUserRequest) (*GetActiveBookingByUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetActiveBookingByUser not implemented")
+}
+func (UnimplementedBookingServiceServer) CheckAvailability(context.Context, *CheckAvailabilityRequest) (*CheckAvailabilityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckAvailability not implemented")
 }
 func (UnimplementedBookingServiceServer) testEmbeddedByValue() {}
 
@@ -244,6 +334,42 @@ func _BookingService_ListBookings_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BookingServiceServer).ListBookings(ctx, req.(*ListBookingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookingService_UpdateBooking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBookingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).UpdateBooking(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_UpdateBooking_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).UpdateBooking(ctx, req.(*UpdateBookingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookingService_DeleteBooking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBookingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).DeleteBooking(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_DeleteBooking_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).DeleteBooking(ctx, req.(*DeleteBookingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -320,6 +446,60 @@ func _BookingService_CompleteBooking_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookingService_ExtendBooking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExtendBookingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).ExtendBooking(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_ExtendBooking_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).ExtendBooking(ctx, req.(*ExtendBookingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookingService_GetActiveBookingByUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveBookingByUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).GetActiveBookingByUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_GetActiveBookingByUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).GetActiveBookingByUser(ctx, req.(*GetActiveBookingByUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookingService_CheckAvailability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckAvailabilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).CheckAvailability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_CheckAvailability_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).CheckAvailability(ctx, req.(*CheckAvailabilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -340,6 +520,14 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BookingService_ListBookings_Handler,
 		},
 		{
+			MethodName: "UpdateBooking",
+			Handler:    _BookingService_UpdateBooking_Handler,
+		},
+		{
+			MethodName: "DeleteBooking",
+			Handler:    _BookingService_DeleteBooking_Handler,
+		},
+		{
 			MethodName: "ConfirmBooking",
 			Handler:    _BookingService_ConfirmBooking_Handler,
 		},
@@ -354,6 +542,18 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CompleteBooking",
 			Handler:    _BookingService_CompleteBooking_Handler,
+		},
+		{
+			MethodName: "ExtendBooking",
+			Handler:    _BookingService_ExtendBooking_Handler,
+		},
+		{
+			MethodName: "GetActiveBookingByUser",
+			Handler:    _BookingService_GetActiveBookingByUser_Handler,
+		},
+		{
+			MethodName: "CheckAvailability",
+			Handler:    _BookingService_CheckAvailability_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
