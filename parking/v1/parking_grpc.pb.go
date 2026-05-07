@@ -19,42 +19,36 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ParkingService_CreateParking_FullMethodName     = "/parking.v1.ParkingService/CreateParking"
-	ParkingService_GetParking_FullMethodName        = "/parking.v1.ParkingService/GetParking"
-	ParkingService_GetAllParkings_FullMethodName    = "/parking.v1.ParkingService/GetAllParkings"
-	ParkingService_DeleteParking_FullMethodName     = "/parking.v1.ParkingService/DeleteParking"
-	ParkingService_CreateSpot_FullMethodName        = "/parking.v1.ParkingService/CreateSpot"
-	ParkingService_GetSpot_FullMethodName           = "/parking.v1.ParkingService/GetSpot"
-	ParkingService_GetSpotsByParking_FullMethodName = "/parking.v1.ParkingService/GetSpotsByParking"
-	ParkingService_UpdateSpotStatus_FullMethodName  = "/parking.v1.ParkingService/UpdateSpotStatus"
+	ParkingService_CreateParkingLot_FullMethodName  = "/parking.v1.ParkingService/CreateParkingLot"
+	ParkingService_GetParkingLot_FullMethodName     = "/parking.v1.ParkingService/GetParkingLot"
+	ParkingService_UpdateParkingLot_FullMethodName  = "/parking.v1.ParkingService/UpdateParkingLot"
+	ParkingService_DeleteParkingLot_FullMethodName  = "/parking.v1.ParkingService/DeleteParkingLot"
+	ParkingService_ListParkingLots_FullMethodName   = "/parking.v1.ParkingService/ListParkingLots"
+	ParkingService_CreateParkingSpot_FullMethodName = "/parking.v1.ParkingService/CreateParkingSpot"
+	ParkingService_GetParkingSpot_FullMethodName    = "/parking.v1.ParkingService/GetParkingSpot"
+	ParkingService_UpdateParkingSpot_FullMethodName = "/parking.v1.ParkingService/UpdateParkingSpot"
+	ParkingService_DeleteParkingSpot_FullMethodName = "/parking.v1.ParkingService/DeleteParkingSpot"
+	ParkingService_ListParkingSpots_FullMethodName  = "/parking.v1.ParkingService/ListParkingSpots"
 	ParkingService_ReserveSpot_FullMethodName       = "/parking.v1.ParkingService/ReserveSpot"
 	ParkingService_ReleaseSpot_FullMethodName       = "/parking.v1.ParkingService/ReleaseSpot"
-	ParkingService_DeleteSpot_FullMethodName        = "/parking.v1.ParkingService/DeleteSpot"
-	ParkingService_CreateTariff_FullMethodName      = "/parking.v1.ParkingService/CreateTariff"
-	ParkingService_GetTariff_FullMethodName         = "/parking.v1.ParkingService/GetTariff"
-	ParkingService_UpdateTariff_FullMethodName      = "/parking.v1.ParkingService/UpdateTariff"
-	ParkingService_CalculatePrice_FullMethodName    = "/parking.v1.ParkingService/CalculatePrice"
 )
 
 // ParkingServiceClient is the client API for ParkingService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ParkingServiceClient interface {
-	CreateParking(ctx context.Context, in *CreateParkingRequest, opts ...grpc.CallOption) (*ParkingResponse, error)
-	GetParking(ctx context.Context, in *GetParkingRequest, opts ...grpc.CallOption) (*ParkingResponse, error)
-	GetAllParkings(ctx context.Context, in *GetAllParkingsRequest, opts ...grpc.CallOption) (*ParkingListResponse, error)
-	DeleteParking(ctx context.Context, in *DeleteParkingRequest, opts ...grpc.CallOption) (*ActionResponse, error)
-	CreateSpot(ctx context.Context, in *CreateSpotRequest, opts ...grpc.CallOption) (*SpotResponse, error)
-	GetSpot(ctx context.Context, in *GetSpotRequest, opts ...grpc.CallOption) (*SpotResponse, error)
-	GetSpotsByParking(ctx context.Context, in *GetSpotsByParkingRequest, opts ...grpc.CallOption) (*SpotListResponse, error)
-	UpdateSpotStatus(ctx context.Context, in *UpdateSpotStatusRequest, opts ...grpc.CallOption) (*ActionResponse, error)
-	ReserveSpot(ctx context.Context, in *SpotActionRequest, opts ...grpc.CallOption) (*ActionResponse, error)
-	ReleaseSpot(ctx context.Context, in *SpotActionRequest, opts ...grpc.CallOption) (*ActionResponse, error)
-	DeleteSpot(ctx context.Context, in *DeleteSpotRequest, opts ...grpc.CallOption) (*ActionResponse, error)
-	CreateTariff(ctx context.Context, in *CreateTariffRequest, opts ...grpc.CallOption) (*TariffResponse, error)
-	GetTariff(ctx context.Context, in *GetTariffRequest, opts ...grpc.CallOption) (*TariffResponse, error)
-	UpdateTariff(ctx context.Context, in *UpdateTariffRequest, opts ...grpc.CallOption) (*ActionResponse, error)
-	CalculatePrice(ctx context.Context, in *CalculatePriceRequest, opts ...grpc.CallOption) (*CalculatePriceResponse, error)
+	CreateParkingLot(ctx context.Context, in *CreateParkingLotRequest, opts ...grpc.CallOption) (*CreateParkingLotResponse, error)
+	GetParkingLot(ctx context.Context, in *GetParkingLotRequest, opts ...grpc.CallOption) (*GetParkingLotResponse, error)
+	UpdateParkingLot(ctx context.Context, in *UpdateParkingLotRequest, opts ...grpc.CallOption) (*UpdateParkingLotResponse, error)
+	DeleteParkingLot(ctx context.Context, in *DeleteParkingLotRequest, opts ...grpc.CallOption) (*DeleteParkingLotResponse, error)
+	ListParkingLots(ctx context.Context, in *ListParkingLotsRequest, opts ...grpc.CallOption) (*ListParkingLotsResponse, error)
+	CreateParkingSpot(ctx context.Context, in *CreateParkingSpotRequest, opts ...grpc.CallOption) (*CreateParkingSpotResponse, error)
+	GetParkingSpot(ctx context.Context, in *GetParkingSpotRequest, opts ...grpc.CallOption) (*GetParkingSpotResponse, error)
+	UpdateParkingSpot(ctx context.Context, in *UpdateParkingSpotRequest, opts ...grpc.CallOption) (*UpdateParkingSpotResponse, error)
+	DeleteParkingSpot(ctx context.Context, in *DeleteParkingSpotRequest, opts ...grpc.CallOption) (*DeleteParkingSpotResponse, error)
+	ListParkingSpots(ctx context.Context, in *ListParkingSpotsRequest, opts ...grpc.CallOption) (*ListParkingSpotsResponse, error)
+	ReserveSpot(ctx context.Context, in *ReserveSpotRequest, opts ...grpc.CallOption) (*ReserveSpotResponse, error)
+	ReleaseSpot(ctx context.Context, in *ReleaseSpotRequest, opts ...grpc.CallOption) (*ReleaseSpotResponse, error)
 }
 
 type parkingServiceClient struct {
@@ -65,89 +59,109 @@ func NewParkingServiceClient(cc grpc.ClientConnInterface) ParkingServiceClient {
 	return &parkingServiceClient{cc}
 }
 
-func (c *parkingServiceClient) CreateParking(ctx context.Context, in *CreateParkingRequest, opts ...grpc.CallOption) (*ParkingResponse, error) {
+func (c *parkingServiceClient) CreateParkingLot(ctx context.Context, in *CreateParkingLotRequest, opts ...grpc.CallOption) (*CreateParkingLotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ParkingResponse)
-	err := c.cc.Invoke(ctx, ParkingService_CreateParking_FullMethodName, in, out, cOpts...)
+	out := new(CreateParkingLotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_CreateParkingLot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) GetParking(ctx context.Context, in *GetParkingRequest, opts ...grpc.CallOption) (*ParkingResponse, error) {
+func (c *parkingServiceClient) GetParkingLot(ctx context.Context, in *GetParkingLotRequest, opts ...grpc.CallOption) (*GetParkingLotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ParkingResponse)
-	err := c.cc.Invoke(ctx, ParkingService_GetParking_FullMethodName, in, out, cOpts...)
+	out := new(GetParkingLotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_GetParkingLot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) GetAllParkings(ctx context.Context, in *GetAllParkingsRequest, opts ...grpc.CallOption) (*ParkingListResponse, error) {
+func (c *parkingServiceClient) UpdateParkingLot(ctx context.Context, in *UpdateParkingLotRequest, opts ...grpc.CallOption) (*UpdateParkingLotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ParkingListResponse)
-	err := c.cc.Invoke(ctx, ParkingService_GetAllParkings_FullMethodName, in, out, cOpts...)
+	out := new(UpdateParkingLotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_UpdateParkingLot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) DeleteParking(ctx context.Context, in *DeleteParkingRequest, opts ...grpc.CallOption) (*ActionResponse, error) {
+func (c *parkingServiceClient) DeleteParkingLot(ctx context.Context, in *DeleteParkingLotRequest, opts ...grpc.CallOption) (*DeleteParkingLotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ActionResponse)
-	err := c.cc.Invoke(ctx, ParkingService_DeleteParking_FullMethodName, in, out, cOpts...)
+	out := new(DeleteParkingLotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_DeleteParkingLot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) CreateSpot(ctx context.Context, in *CreateSpotRequest, opts ...grpc.CallOption) (*SpotResponse, error) {
+func (c *parkingServiceClient) ListParkingLots(ctx context.Context, in *ListParkingLotsRequest, opts ...grpc.CallOption) (*ListParkingLotsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SpotResponse)
-	err := c.cc.Invoke(ctx, ParkingService_CreateSpot_FullMethodName, in, out, cOpts...)
+	out := new(ListParkingLotsResponse)
+	err := c.cc.Invoke(ctx, ParkingService_ListParkingLots_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) GetSpot(ctx context.Context, in *GetSpotRequest, opts ...grpc.CallOption) (*SpotResponse, error) {
+func (c *parkingServiceClient) CreateParkingSpot(ctx context.Context, in *CreateParkingSpotRequest, opts ...grpc.CallOption) (*CreateParkingSpotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SpotResponse)
-	err := c.cc.Invoke(ctx, ParkingService_GetSpot_FullMethodName, in, out, cOpts...)
+	out := new(CreateParkingSpotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_CreateParkingSpot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) GetSpotsByParking(ctx context.Context, in *GetSpotsByParkingRequest, opts ...grpc.CallOption) (*SpotListResponse, error) {
+func (c *parkingServiceClient) GetParkingSpot(ctx context.Context, in *GetParkingSpotRequest, opts ...grpc.CallOption) (*GetParkingSpotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SpotListResponse)
-	err := c.cc.Invoke(ctx, ParkingService_GetSpotsByParking_FullMethodName, in, out, cOpts...)
+	out := new(GetParkingSpotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_GetParkingSpot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) UpdateSpotStatus(ctx context.Context, in *UpdateSpotStatusRequest, opts ...grpc.CallOption) (*ActionResponse, error) {
+func (c *parkingServiceClient) UpdateParkingSpot(ctx context.Context, in *UpdateParkingSpotRequest, opts ...grpc.CallOption) (*UpdateParkingSpotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ActionResponse)
-	err := c.cc.Invoke(ctx, ParkingService_UpdateSpotStatus_FullMethodName, in, out, cOpts...)
+	out := new(UpdateParkingSpotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_UpdateParkingSpot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *parkingServiceClient) ReserveSpot(ctx context.Context, in *SpotActionRequest, opts ...grpc.CallOption) (*ActionResponse, error) {
+func (c *parkingServiceClient) DeleteParkingSpot(ctx context.Context, in *DeleteParkingSpotRequest, opts ...grpc.CallOption) (*DeleteParkingSpotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ActionResponse)
+	out := new(DeleteParkingSpotResponse)
+	err := c.cc.Invoke(ctx, ParkingService_DeleteParkingSpot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *parkingServiceClient) ListParkingSpots(ctx context.Context, in *ListParkingSpotsRequest, opts ...grpc.CallOption) (*ListParkingSpotsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListParkingSpotsResponse)
+	err := c.cc.Invoke(ctx, ParkingService_ListParkingSpots_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *parkingServiceClient) ReserveSpot(ctx context.Context, in *ReserveSpotRequest, opts ...grpc.CallOption) (*ReserveSpotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReserveSpotResponse)
 	err := c.cc.Invoke(ctx, ParkingService_ReserveSpot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -155,60 +169,10 @@ func (c *parkingServiceClient) ReserveSpot(ctx context.Context, in *SpotActionRe
 	return out, nil
 }
 
-func (c *parkingServiceClient) ReleaseSpot(ctx context.Context, in *SpotActionRequest, opts ...grpc.CallOption) (*ActionResponse, error) {
+func (c *parkingServiceClient) ReleaseSpot(ctx context.Context, in *ReleaseSpotRequest, opts ...grpc.CallOption) (*ReleaseSpotResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ActionResponse)
+	out := new(ReleaseSpotResponse)
 	err := c.cc.Invoke(ctx, ParkingService_ReleaseSpot_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *parkingServiceClient) DeleteSpot(ctx context.Context, in *DeleteSpotRequest, opts ...grpc.CallOption) (*ActionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ActionResponse)
-	err := c.cc.Invoke(ctx, ParkingService_DeleteSpot_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *parkingServiceClient) CreateTariff(ctx context.Context, in *CreateTariffRequest, opts ...grpc.CallOption) (*TariffResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TariffResponse)
-	err := c.cc.Invoke(ctx, ParkingService_CreateTariff_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *parkingServiceClient) GetTariff(ctx context.Context, in *GetTariffRequest, opts ...grpc.CallOption) (*TariffResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TariffResponse)
-	err := c.cc.Invoke(ctx, ParkingService_GetTariff_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *parkingServiceClient) UpdateTariff(ctx context.Context, in *UpdateTariffRequest, opts ...grpc.CallOption) (*ActionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ActionResponse)
-	err := c.cc.Invoke(ctx, ParkingService_UpdateTariff_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *parkingServiceClient) CalculatePrice(ctx context.Context, in *CalculatePriceRequest, opts ...grpc.CallOption) (*CalculatePriceResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CalculatePriceResponse)
-	err := c.cc.Invoke(ctx, ParkingService_CalculatePrice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -219,21 +183,18 @@ func (c *parkingServiceClient) CalculatePrice(ctx context.Context, in *Calculate
 // All implementations should embed UnimplementedParkingServiceServer
 // for forward compatibility.
 type ParkingServiceServer interface {
-	CreateParking(context.Context, *CreateParkingRequest) (*ParkingResponse, error)
-	GetParking(context.Context, *GetParkingRequest) (*ParkingResponse, error)
-	GetAllParkings(context.Context, *GetAllParkingsRequest) (*ParkingListResponse, error)
-	DeleteParking(context.Context, *DeleteParkingRequest) (*ActionResponse, error)
-	CreateSpot(context.Context, *CreateSpotRequest) (*SpotResponse, error)
-	GetSpot(context.Context, *GetSpotRequest) (*SpotResponse, error)
-	GetSpotsByParking(context.Context, *GetSpotsByParkingRequest) (*SpotListResponse, error)
-	UpdateSpotStatus(context.Context, *UpdateSpotStatusRequest) (*ActionResponse, error)
-	ReserveSpot(context.Context, *SpotActionRequest) (*ActionResponse, error)
-	ReleaseSpot(context.Context, *SpotActionRequest) (*ActionResponse, error)
-	DeleteSpot(context.Context, *DeleteSpotRequest) (*ActionResponse, error)
-	CreateTariff(context.Context, *CreateTariffRequest) (*TariffResponse, error)
-	GetTariff(context.Context, *GetTariffRequest) (*TariffResponse, error)
-	UpdateTariff(context.Context, *UpdateTariffRequest) (*ActionResponse, error)
-	CalculatePrice(context.Context, *CalculatePriceRequest) (*CalculatePriceResponse, error)
+	CreateParkingLot(context.Context, *CreateParkingLotRequest) (*CreateParkingLotResponse, error)
+	GetParkingLot(context.Context, *GetParkingLotRequest) (*GetParkingLotResponse, error)
+	UpdateParkingLot(context.Context, *UpdateParkingLotRequest) (*UpdateParkingLotResponse, error)
+	DeleteParkingLot(context.Context, *DeleteParkingLotRequest) (*DeleteParkingLotResponse, error)
+	ListParkingLots(context.Context, *ListParkingLotsRequest) (*ListParkingLotsResponse, error)
+	CreateParkingSpot(context.Context, *CreateParkingSpotRequest) (*CreateParkingSpotResponse, error)
+	GetParkingSpot(context.Context, *GetParkingSpotRequest) (*GetParkingSpotResponse, error)
+	UpdateParkingSpot(context.Context, *UpdateParkingSpotRequest) (*UpdateParkingSpotResponse, error)
+	DeleteParkingSpot(context.Context, *DeleteParkingSpotRequest) (*DeleteParkingSpotResponse, error)
+	ListParkingSpots(context.Context, *ListParkingSpotsRequest) (*ListParkingSpotsResponse, error)
+	ReserveSpot(context.Context, *ReserveSpotRequest) (*ReserveSpotResponse, error)
+	ReleaseSpot(context.Context, *ReleaseSpotRequest) (*ReleaseSpotResponse, error)
 }
 
 // UnimplementedParkingServiceServer should be embedded to have
@@ -243,50 +204,41 @@ type ParkingServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedParkingServiceServer struct{}
 
-func (UnimplementedParkingServiceServer) CreateParking(context.Context, *CreateParkingRequest) (*ParkingResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateParking not implemented")
+func (UnimplementedParkingServiceServer) CreateParkingLot(context.Context, *CreateParkingLotRequest) (*CreateParkingLotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateParkingLot not implemented")
 }
-func (UnimplementedParkingServiceServer) GetParking(context.Context, *GetParkingRequest) (*ParkingResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetParking not implemented")
+func (UnimplementedParkingServiceServer) GetParkingLot(context.Context, *GetParkingLotRequest) (*GetParkingLotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetParkingLot not implemented")
 }
-func (UnimplementedParkingServiceServer) GetAllParkings(context.Context, *GetAllParkingsRequest) (*ParkingListResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAllParkings not implemented")
+func (UnimplementedParkingServiceServer) UpdateParkingLot(context.Context, *UpdateParkingLotRequest) (*UpdateParkingLotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateParkingLot not implemented")
 }
-func (UnimplementedParkingServiceServer) DeleteParking(context.Context, *DeleteParkingRequest) (*ActionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteParking not implemented")
+func (UnimplementedParkingServiceServer) DeleteParkingLot(context.Context, *DeleteParkingLotRequest) (*DeleteParkingLotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteParkingLot not implemented")
 }
-func (UnimplementedParkingServiceServer) CreateSpot(context.Context, *CreateSpotRequest) (*SpotResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateSpot not implemented")
+func (UnimplementedParkingServiceServer) ListParkingLots(context.Context, *ListParkingLotsRequest) (*ListParkingLotsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListParkingLots not implemented")
 }
-func (UnimplementedParkingServiceServer) GetSpot(context.Context, *GetSpotRequest) (*SpotResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSpot not implemented")
+func (UnimplementedParkingServiceServer) CreateParkingSpot(context.Context, *CreateParkingSpotRequest) (*CreateParkingSpotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateParkingSpot not implemented")
 }
-func (UnimplementedParkingServiceServer) GetSpotsByParking(context.Context, *GetSpotsByParkingRequest) (*SpotListResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSpotsByParking not implemented")
+func (UnimplementedParkingServiceServer) GetParkingSpot(context.Context, *GetParkingSpotRequest) (*GetParkingSpotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetParkingSpot not implemented")
 }
-func (UnimplementedParkingServiceServer) UpdateSpotStatus(context.Context, *UpdateSpotStatusRequest) (*ActionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateSpotStatus not implemented")
+func (UnimplementedParkingServiceServer) UpdateParkingSpot(context.Context, *UpdateParkingSpotRequest) (*UpdateParkingSpotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateParkingSpot not implemented")
 }
-func (UnimplementedParkingServiceServer) ReserveSpot(context.Context, *SpotActionRequest) (*ActionResponse, error) {
+func (UnimplementedParkingServiceServer) DeleteParkingSpot(context.Context, *DeleteParkingSpotRequest) (*DeleteParkingSpotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteParkingSpot not implemented")
+}
+func (UnimplementedParkingServiceServer) ListParkingSpots(context.Context, *ListParkingSpotsRequest) (*ListParkingSpotsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListParkingSpots not implemented")
+}
+func (UnimplementedParkingServiceServer) ReserveSpot(context.Context, *ReserveSpotRequest) (*ReserveSpotResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReserveSpot not implemented")
 }
-func (UnimplementedParkingServiceServer) ReleaseSpot(context.Context, *SpotActionRequest) (*ActionResponse, error) {
+func (UnimplementedParkingServiceServer) ReleaseSpot(context.Context, *ReleaseSpotRequest) (*ReleaseSpotResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReleaseSpot not implemented")
-}
-func (UnimplementedParkingServiceServer) DeleteSpot(context.Context, *DeleteSpotRequest) (*ActionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteSpot not implemented")
-}
-func (UnimplementedParkingServiceServer) CreateTariff(context.Context, *CreateTariffRequest) (*TariffResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateTariff not implemented")
-}
-func (UnimplementedParkingServiceServer) GetTariff(context.Context, *GetTariffRequest) (*TariffResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTariff not implemented")
-}
-func (UnimplementedParkingServiceServer) UpdateTariff(context.Context, *UpdateTariffRequest) (*ActionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateTariff not implemented")
-}
-func (UnimplementedParkingServiceServer) CalculatePrice(context.Context, *CalculatePriceRequest) (*CalculatePriceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CalculatePrice not implemented")
 }
 func (UnimplementedParkingServiceServer) testEmbeddedByValue() {}
 
@@ -308,152 +260,188 @@ func RegisterParkingServiceServer(s grpc.ServiceRegistrar, srv ParkingServiceSer
 	s.RegisterService(&ParkingService_ServiceDesc, srv)
 }
 
-func _ParkingService_CreateParking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateParkingRequest)
+func _ParkingService_CreateParkingLot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateParkingLotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).CreateParking(ctx, in)
+		return srv.(ParkingServiceServer).CreateParkingLot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_CreateParking_FullMethodName,
+		FullMethod: ParkingService_CreateParkingLot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).CreateParking(ctx, req.(*CreateParkingRequest))
+		return srv.(ParkingServiceServer).CreateParkingLot(ctx, req.(*CreateParkingLotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ParkingService_GetParking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetParkingRequest)
+func _ParkingService_GetParkingLot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetParkingLotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).GetParking(ctx, in)
+		return srv.(ParkingServiceServer).GetParkingLot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_GetParking_FullMethodName,
+		FullMethod: ParkingService_GetParkingLot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).GetParking(ctx, req.(*GetParkingRequest))
+		return srv.(ParkingServiceServer).GetParkingLot(ctx, req.(*GetParkingLotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ParkingService_GetAllParkings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAllParkingsRequest)
+func _ParkingService_UpdateParkingLot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateParkingLotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).GetAllParkings(ctx, in)
+		return srv.(ParkingServiceServer).UpdateParkingLot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_GetAllParkings_FullMethodName,
+		FullMethod: ParkingService_UpdateParkingLot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).GetAllParkings(ctx, req.(*GetAllParkingsRequest))
+		return srv.(ParkingServiceServer).UpdateParkingLot(ctx, req.(*UpdateParkingLotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ParkingService_DeleteParking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteParkingRequest)
+func _ParkingService_DeleteParkingLot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteParkingLotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).DeleteParking(ctx, in)
+		return srv.(ParkingServiceServer).DeleteParkingLot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_DeleteParking_FullMethodName,
+		FullMethod: ParkingService_DeleteParkingLot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).DeleteParking(ctx, req.(*DeleteParkingRequest))
+		return srv.(ParkingServiceServer).DeleteParkingLot(ctx, req.(*DeleteParkingLotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ParkingService_CreateSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateSpotRequest)
+func _ParkingService_ListParkingLots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListParkingLotsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).CreateSpot(ctx, in)
+		return srv.(ParkingServiceServer).ListParkingLots(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_CreateSpot_FullMethodName,
+		FullMethod: ParkingService_ListParkingLots_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).CreateSpot(ctx, req.(*CreateSpotRequest))
+		return srv.(ParkingServiceServer).ListParkingLots(ctx, req.(*ListParkingLotsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ParkingService_GetSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSpotRequest)
+func _ParkingService_CreateParkingSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateParkingSpotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).GetSpot(ctx, in)
+		return srv.(ParkingServiceServer).CreateParkingSpot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_GetSpot_FullMethodName,
+		FullMethod: ParkingService_CreateParkingSpot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).GetSpot(ctx, req.(*GetSpotRequest))
+		return srv.(ParkingServiceServer).CreateParkingSpot(ctx, req.(*CreateParkingSpotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ParkingService_GetSpotsByParking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSpotsByParkingRequest)
+func _ParkingService_GetParkingSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetParkingSpotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).GetSpotsByParking(ctx, in)
+		return srv.(ParkingServiceServer).GetParkingSpot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_GetSpotsByParking_FullMethodName,
+		FullMethod: ParkingService_GetParkingSpot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).GetSpotsByParking(ctx, req.(*GetSpotsByParkingRequest))
+		return srv.(ParkingServiceServer).GetParkingSpot(ctx, req.(*GetParkingSpotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ParkingService_UpdateSpotStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateSpotStatusRequest)
+func _ParkingService_UpdateParkingSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateParkingSpotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ParkingServiceServer).UpdateSpotStatus(ctx, in)
+		return srv.(ParkingServiceServer).UpdateParkingSpot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ParkingService_UpdateSpotStatus_FullMethodName,
+		FullMethod: ParkingService_UpdateParkingSpot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).UpdateSpotStatus(ctx, req.(*UpdateSpotStatusRequest))
+		return srv.(ParkingServiceServer).UpdateParkingSpot(ctx, req.(*UpdateParkingSpotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ParkingService_DeleteParkingSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteParkingSpotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ParkingServiceServer).DeleteParkingSpot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ParkingService_DeleteParkingSpot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ParkingServiceServer).DeleteParkingSpot(ctx, req.(*DeleteParkingSpotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ParkingService_ListParkingSpots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListParkingSpotsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ParkingServiceServer).ListParkingSpots(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ParkingService_ListParkingSpots_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ParkingServiceServer).ListParkingSpots(ctx, req.(*ListParkingSpotsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ParkingService_ReserveSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SpotActionRequest)
+	in := new(ReserveSpotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -465,13 +453,13 @@ func _ParkingService_ReserveSpot_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: ParkingService_ReserveSpot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).ReserveSpot(ctx, req.(*SpotActionRequest))
+		return srv.(ParkingServiceServer).ReserveSpot(ctx, req.(*ReserveSpotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ParkingService_ReleaseSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SpotActionRequest)
+	in := new(ReleaseSpotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -483,97 +471,7 @@ func _ParkingService_ReleaseSpot_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: ParkingService_ReleaseSpot_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).ReleaseSpot(ctx, req.(*SpotActionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ParkingService_DeleteSpot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteSpotRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ParkingServiceServer).DeleteSpot(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ParkingService_DeleteSpot_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).DeleteSpot(ctx, req.(*DeleteSpotRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ParkingService_CreateTariff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateTariffRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ParkingServiceServer).CreateTariff(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ParkingService_CreateTariff_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).CreateTariff(ctx, req.(*CreateTariffRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ParkingService_GetTariff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTariffRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ParkingServiceServer).GetTariff(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ParkingService_GetTariff_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).GetTariff(ctx, req.(*GetTariffRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ParkingService_UpdateTariff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTariffRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ParkingServiceServer).UpdateTariff(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ParkingService_UpdateTariff_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).UpdateTariff(ctx, req.(*UpdateTariffRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ParkingService_CalculatePrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CalculatePriceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ParkingServiceServer).CalculatePrice(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ParkingService_CalculatePrice_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParkingServiceServer).CalculatePrice(ctx, req.(*CalculatePriceRequest))
+		return srv.(ParkingServiceServer).ReleaseSpot(ctx, req.(*ReleaseSpotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -586,36 +484,44 @@ var ParkingService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ParkingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateParking",
-			Handler:    _ParkingService_CreateParking_Handler,
+			MethodName: "CreateParkingLot",
+			Handler:    _ParkingService_CreateParkingLot_Handler,
 		},
 		{
-			MethodName: "GetParking",
-			Handler:    _ParkingService_GetParking_Handler,
+			MethodName: "GetParkingLot",
+			Handler:    _ParkingService_GetParkingLot_Handler,
 		},
 		{
-			MethodName: "GetAllParkings",
-			Handler:    _ParkingService_GetAllParkings_Handler,
+			MethodName: "UpdateParkingLot",
+			Handler:    _ParkingService_UpdateParkingLot_Handler,
 		},
 		{
-			MethodName: "DeleteParking",
-			Handler:    _ParkingService_DeleteParking_Handler,
+			MethodName: "DeleteParkingLot",
+			Handler:    _ParkingService_DeleteParkingLot_Handler,
 		},
 		{
-			MethodName: "CreateSpot",
-			Handler:    _ParkingService_CreateSpot_Handler,
+			MethodName: "ListParkingLots",
+			Handler:    _ParkingService_ListParkingLots_Handler,
 		},
 		{
-			MethodName: "GetSpot",
-			Handler:    _ParkingService_GetSpot_Handler,
+			MethodName: "CreateParkingSpot",
+			Handler:    _ParkingService_CreateParkingSpot_Handler,
 		},
 		{
-			MethodName: "GetSpotsByParking",
-			Handler:    _ParkingService_GetSpotsByParking_Handler,
+			MethodName: "GetParkingSpot",
+			Handler:    _ParkingService_GetParkingSpot_Handler,
 		},
 		{
-			MethodName: "UpdateSpotStatus",
-			Handler:    _ParkingService_UpdateSpotStatus_Handler,
+			MethodName: "UpdateParkingSpot",
+			Handler:    _ParkingService_UpdateParkingSpot_Handler,
+		},
+		{
+			MethodName: "DeleteParkingSpot",
+			Handler:    _ParkingService_DeleteParkingSpot_Handler,
+		},
+		{
+			MethodName: "ListParkingSpots",
+			Handler:    _ParkingService_ListParkingSpots_Handler,
 		},
 		{
 			MethodName: "ReserveSpot",
@@ -624,26 +530,6 @@ var ParkingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReleaseSpot",
 			Handler:    _ParkingService_ReleaseSpot_Handler,
-		},
-		{
-			MethodName: "DeleteSpot",
-			Handler:    _ParkingService_DeleteSpot_Handler,
-		},
-		{
-			MethodName: "CreateTariff",
-			Handler:    _ParkingService_CreateTariff_Handler,
-		},
-		{
-			MethodName: "GetTariff",
-			Handler:    _ParkingService_GetTariff_Handler,
-		},
-		{
-			MethodName: "UpdateTariff",
-			Handler:    _ParkingService_UpdateTariff_Handler,
-		},
-		{
-			MethodName: "CalculatePrice",
-			Handler:    _ParkingService_CalculatePrice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

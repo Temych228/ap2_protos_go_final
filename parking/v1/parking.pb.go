@@ -9,6 +9,7 @@ package parkingv1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -21,26 +22,37 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetAllParkingsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type ParkingLot struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Address        string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
+	Latitude       float64                `protobuf:"fixed64,4,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude      float64                `protobuf:"fixed64,5,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	TotalSpots     int32                  `protobuf:"varint,6,opt,name=total_spots,json=totalSpots,proto3" json:"total_spots,omitempty"`
+	AvailableSpots int32                  `protobuf:"varint,7,opt,name=available_spots,json=availableSpots,proto3" json:"available_spots,omitempty"`
+	PricePerHour   float64                `protobuf:"fixed64,8,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
+	IsActive       bool                   `protobuf:"varint,9,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
-func (x *GetAllParkingsRequest) Reset() {
-	*x = GetAllParkingsRequest{}
+func (x *ParkingLot) Reset() {
+	*x = ParkingLot{}
 	mi := &file_parking_v1_parking_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetAllParkingsRequest) String() string {
+func (x *ParkingLot) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAllParkingsRequest) ProtoMessage() {}
+func (*ParkingLot) ProtoMessage() {}
 
-func (x *GetAllParkingsRequest) ProtoReflect() protoreflect.Message {
+func (x *ParkingLot) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -52,36 +64,119 @@ func (x *GetAllParkingsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAllParkingsRequest.ProtoReflect.Descriptor instead.
-func (*GetAllParkingsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ParkingLot.ProtoReflect.Descriptor instead.
+func (*ParkingLot) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{0}
 }
 
-type Parking struct {
+func (x *ParkingLot) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ParkingLot) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ParkingLot) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *ParkingLot) GetLatitude() float64 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
+func (x *ParkingLot) GetLongitude() float64 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
+func (x *ParkingLot) GetTotalSpots() int32 {
+	if x != nil {
+		return x.TotalSpots
+	}
+	return 0
+}
+
+func (x *ParkingLot) GetAvailableSpots() int32 {
+	if x != nil {
+		return x.AvailableSpots
+	}
+	return 0
+}
+
+func (x *ParkingLot) GetPricePerHour() float64 {
+	if x != nil {
+		return x.PricePerHour
+	}
+	return 0
+}
+
+func (x *ParkingLot) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+func (x *ParkingLot) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *ParkingLot) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type ParkingSpot struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Address       string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	TotalSpots    int32                  `protobuf:"varint,4,opt,name=total_spots,json=totalSpots,proto3" json:"total_spots,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ParkingLotId  string                 `protobuf:"bytes,2,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	Level         string                 `protobuf:"bytes,4,opt,name=level,proto3" json:"level,omitempty"`
+	SpotType      string                 `protobuf:"bytes,5,opt,name=spot_type,json=spotType,proto3" json:"spot_type,omitempty"`
+	VehicleType   string                 `protobuf:"bytes,6,opt,name=vehicle_type,json=vehicleType,proto3" json:"vehicle_type,omitempty"`
+	IsActive      bool                   `protobuf:"varint,7,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	IsOccupied    bool                   `protobuf:"varint,8,opt,name=is_occupied,json=isOccupied,proto3" json:"is_occupied,omitempty"`
+	IsReserved    bool                   `protobuf:"varint,9,opt,name=is_reserved,json=isReserved,proto3" json:"is_reserved,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Parking) Reset() {
-	*x = Parking{}
+func (x *ParkingSpot) Reset() {
+	*x = ParkingSpot{}
 	mi := &file_parking_v1_parking_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Parking) String() string {
+func (x *ParkingSpot) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Parking) ProtoMessage() {}
+func (*ParkingSpot) ProtoMessage() {}
 
-func (x *Parking) ProtoReflect() protoreflect.Message {
+func (x *ParkingSpot) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -93,71 +188,118 @@ func (x *Parking) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Parking.ProtoReflect.Descriptor instead.
-func (*Parking) Descriptor() ([]byte, []int) {
+// Deprecated: Use ParkingSpot.ProtoReflect.Descriptor instead.
+func (*ParkingSpot) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Parking) GetId() int64 {
+func (x *ParkingSpot) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
-func (x *Parking) GetName() string {
+func (x *ParkingSpot) GetParkingLotId() string {
 	if x != nil {
-		return x.Name
+		return x.ParkingLotId
 	}
 	return ""
 }
 
-func (x *Parking) GetAddress() string {
+func (x *ParkingSpot) GetCode() string {
 	if x != nil {
-		return x.Address
+		return x.Code
 	}
 	return ""
 }
 
-func (x *Parking) GetTotalSpots() int32 {
+func (x *ParkingSpot) GetLevel() string {
 	if x != nil {
-		return x.TotalSpots
+		return x.Level
 	}
-	return 0
+	return ""
 }
 
-func (x *Parking) GetCreatedAt() string {
+func (x *ParkingSpot) GetSpotType() string {
+	if x != nil {
+		return x.SpotType
+	}
+	return ""
+}
+
+func (x *ParkingSpot) GetVehicleType() string {
+	if x != nil {
+		return x.VehicleType
+	}
+	return ""
+}
+
+func (x *ParkingSpot) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+func (x *ParkingSpot) GetIsOccupied() bool {
+	if x != nil {
+		return x.IsOccupied
+	}
+	return false
+}
+
+func (x *ParkingSpot) GetIsReserved() bool {
+	if x != nil {
+		return x.IsReserved
+	}
+	return false
+}
+
+func (x *ParkingSpot) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return nil
 }
 
-type Spot struct {
+func (x *ParkingSpot) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type Reservation struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ParkingId     int64                  `protobuf:"varint,2,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	Number        string                 `protobuf:"bytes,3,opt,name=number,proto3" json:"number,omitempty"`
-	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ParkingLotId  string                 `protobuf:"bytes,3,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
+	ParkingSpotId string                 `protobuf:"bytes,4,opt,name=parking_spot_id,json=parkingSpotId,proto3" json:"parking_spot_id,omitempty"`
+	VehicleNumber string                 `protobuf:"bytes,5,opt,name=vehicle_number,json=vehicleNumber,proto3" json:"vehicle_number,omitempty"`
+	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
+	StartsAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=starts_at,json=startsAt,proto3" json:"starts_at,omitempty"`
+	EndsAt        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=ends_at,json=endsAt,proto3" json:"ends_at,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Spot) Reset() {
-	*x = Spot{}
+func (x *Reservation) Reset() {
+	*x = Reservation{}
 	mi := &file_parking_v1_parking_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Spot) String() string {
+func (x *Reservation) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Spot) ProtoMessage() {}
+func (*Reservation) ProtoMessage() {}
 
-func (x *Spot) ProtoReflect() protoreflect.Message {
+func (x *Reservation) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -169,138 +311,108 @@ func (x *Spot) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Spot.ProtoReflect.Descriptor instead.
-func (*Spot) Descriptor() ([]byte, []int) {
+// Deprecated: Use Reservation.ProtoReflect.Descriptor instead.
+func (*Reservation) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Spot) GetId() int64 {
+func (x *Reservation) GetId() string {
 	if x != nil {
 		return x.Id
-	}
-	return 0
-}
-
-func (x *Spot) GetParkingId() int64 {
-	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-func (x *Spot) GetNumber() string {
-	if x != nil {
-		return x.Number
 	}
 	return ""
 }
 
-func (x *Spot) GetStatus() string {
+func (x *Reservation) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *Reservation) GetParkingLotId() string {
+	if x != nil {
+		return x.ParkingLotId
+	}
+	return ""
+}
+
+func (x *Reservation) GetParkingSpotId() string {
+	if x != nil {
+		return x.ParkingSpotId
+	}
+	return ""
+}
+
+func (x *Reservation) GetVehicleNumber() string {
+	if x != nil {
+		return x.VehicleNumber
+	}
+	return ""
+}
+
+func (x *Reservation) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *Spot) GetCreatedAt() string {
+func (x *Reservation) GetStartsAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartsAt
+	}
+	return nil
+}
+
+func (x *Reservation) GetEndsAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndsAt
+	}
+	return nil
+}
+
+func (x *Reservation) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return nil
 }
 
-type Tariff struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ParkingId     int64                  `protobuf:"varint,2,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	PricePerHour  float64                `protobuf:"fixed64,3,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Tariff) Reset() {
-	*x = Tariff{}
-	mi := &file_parking_v1_parking_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Tariff) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Tariff) ProtoMessage() {}
-
-func (x *Tariff) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[3]
+func (x *Reservation) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+		return x.UpdatedAt
 	}
-	return mi.MessageOf(x)
+	return nil
 }
 
-// Deprecated: Use Tariff.ProtoReflect.Descriptor instead.
-func (*Tariff) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *Tariff) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *Tariff) GetParkingId() int64 {
-	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-func (x *Tariff) GetPricePerHour() float64 {
-	if x != nil {
-		return x.PricePerHour
-	}
-	return 0
-}
-
-func (x *Tariff) GetCreatedAt() string {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return ""
-}
-
-type CreateParkingRequest struct {
+type CreateParkingLotRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Address       string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	TotalSpots    int32                  `protobuf:"varint,3,opt,name=total_spots,json=totalSpots,proto3" json:"total_spots,omitempty"`
+	Latitude      float64                `protobuf:"fixed64,3,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude     float64                `protobuf:"fixed64,4,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	TotalSpots    int32                  `protobuf:"varint,5,opt,name=total_spots,json=totalSpots,proto3" json:"total_spots,omitempty"`
+	PricePerHour  float64                `protobuf:"fixed64,6,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateParkingRequest) Reset() {
-	*x = CreateParkingRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[4]
+func (x *CreateParkingLotRequest) Reset() {
+	*x = CreateParkingLotRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateParkingRequest) String() string {
+func (x *CreateParkingLotRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateParkingRequest) ProtoMessage() {}
+func (*CreateParkingLotRequest) ProtoMessage() {}
 
-func (x *CreateParkingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[4]
+func (x *CreateParkingLotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -311,53 +423,118 @@ func (x *CreateParkingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateParkingRequest.ProtoReflect.Descriptor instead.
-func (*CreateParkingRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{4}
+// Deprecated: Use CreateParkingLotRequest.ProtoReflect.Descriptor instead.
+func (*CreateParkingLotRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateParkingRequest) GetName() string {
+func (x *CreateParkingLotRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CreateParkingRequest) GetAddress() string {
+func (x *CreateParkingLotRequest) GetAddress() string {
 	if x != nil {
 		return x.Address
 	}
 	return ""
 }
 
-func (x *CreateParkingRequest) GetTotalSpots() int32 {
+func (x *CreateParkingLotRequest) GetLatitude() float64 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
+func (x *CreateParkingLotRequest) GetLongitude() float64 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
+func (x *CreateParkingLotRequest) GetTotalSpots() int32 {
 	if x != nil {
 		return x.TotalSpots
 	}
 	return 0
 }
 
-type GetParkingRequest struct {
+func (x *CreateParkingLotRequest) GetPricePerHour() float64 {
+	if x != nil {
+		return x.PricePerHour
+	}
+	return 0
+}
+
+type CreateParkingLotResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ParkingLot    *ParkingLot            `protobuf:"bytes,1,opt,name=parking_lot,json=parkingLot,proto3" json:"parking_lot,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetParkingRequest) Reset() {
-	*x = GetParkingRequest{}
+func (x *CreateParkingLotResponse) Reset() {
+	*x = CreateParkingLotResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateParkingLotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateParkingLotResponse) ProtoMessage() {}
+
+func (x *CreateParkingLotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateParkingLotResponse.ProtoReflect.Descriptor instead.
+func (*CreateParkingLotResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateParkingLotResponse) GetParkingLot() *ParkingLot {
+	if x != nil {
+		return x.ParkingLot
+	}
+	return nil
+}
+
+type GetParkingLotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingLotId  string                 `protobuf:"bytes,1,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetParkingLotRequest) Reset() {
+	*x = GetParkingLotRequest{}
 	mi := &file_parking_v1_parking_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetParkingRequest) String() string {
+func (x *GetParkingLotRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetParkingRequest) ProtoMessage() {}
+func (*GetParkingLotRequest) ProtoMessage() {}
 
-func (x *GetParkingRequest) ProtoReflect() protoreflect.Message {
+func (x *GetParkingLotRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -369,39 +546,39 @@ func (x *GetParkingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetParkingRequest.ProtoReflect.Descriptor instead.
-func (*GetParkingRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetParkingLotRequest.ProtoReflect.Descriptor instead.
+func (*GetParkingLotRequest) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetParkingRequest) GetId() int64 {
+func (x *GetParkingLotRequest) GetParkingLotId() string {
 	if x != nil {
-		return x.Id
+		return x.ParkingLotId
 	}
-	return 0
+	return ""
 }
 
-type DeleteParkingRequest struct {
+type GetParkingLotResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ParkingLot    *ParkingLot            `protobuf:"bytes,1,opt,name=parking_lot,json=parkingLot,proto3" json:"parking_lot,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteParkingRequest) Reset() {
-	*x = DeleteParkingRequest{}
+func (x *GetParkingLotResponse) Reset() {
+	*x = GetParkingLotResponse{}
 	mi := &file_parking_v1_parking_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteParkingRequest) String() string {
+func (x *GetParkingLotResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteParkingRequest) ProtoMessage() {}
+func (*GetParkingLotResponse) ProtoMessage() {}
 
-func (x *DeleteParkingRequest) ProtoReflect() protoreflect.Message {
+func (x *GetParkingLotResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -413,39 +590,46 @@ func (x *DeleteParkingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteParkingRequest.ProtoReflect.Descriptor instead.
-func (*DeleteParkingRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetParkingLotResponse.ProtoReflect.Descriptor instead.
+func (*GetParkingLotResponse) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *DeleteParkingRequest) GetId() int64 {
+func (x *GetParkingLotResponse) GetParkingLot() *ParkingLot {
 	if x != nil {
-		return x.Id
+		return x.ParkingLot
 	}
-	return 0
+	return nil
 }
 
-type ParkingResponse struct {
+type UpdateParkingLotRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Parking       *Parking               `protobuf:"bytes,1,opt,name=parking,proto3" json:"parking,omitempty"`
+	ParkingLotId  string                 `protobuf:"bytes,1,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Address       string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
+	Latitude      float64                `protobuf:"fixed64,4,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude     float64                `protobuf:"fixed64,5,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	TotalSpots    int32                  `protobuf:"varint,6,opt,name=total_spots,json=totalSpots,proto3" json:"total_spots,omitempty"`
+	PricePerHour  float64                `protobuf:"fixed64,7,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
+	IsActive      bool                   `protobuf:"varint,8,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ParkingResponse) Reset() {
-	*x = ParkingResponse{}
+func (x *UpdateParkingLotRequest) Reset() {
+	*x = UpdateParkingLotRequest{}
 	mi := &file_parking_v1_parking_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ParkingResponse) String() string {
+func (x *UpdateParkingLotRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ParkingResponse) ProtoMessage() {}
+func (*UpdateParkingLotRequest) ProtoMessage() {}
 
-func (x *ParkingResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateParkingLotRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -457,39 +641,88 @@ func (x *ParkingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ParkingResponse.ProtoReflect.Descriptor instead.
-func (*ParkingResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateParkingLotRequest.ProtoReflect.Descriptor instead.
+func (*UpdateParkingLotRequest) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *ParkingResponse) GetParking() *Parking {
+func (x *UpdateParkingLotRequest) GetParkingLotId() string {
 	if x != nil {
-		return x.Parking
+		return x.ParkingLotId
 	}
-	return nil
+	return ""
 }
 
-type ParkingListResponse struct {
+func (x *UpdateParkingLotRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateParkingLotRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *UpdateParkingLotRequest) GetLatitude() float64 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
+func (x *UpdateParkingLotRequest) GetLongitude() float64 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
+func (x *UpdateParkingLotRequest) GetTotalSpots() int32 {
+	if x != nil {
+		return x.TotalSpots
+	}
+	return 0
+}
+
+func (x *UpdateParkingLotRequest) GetPricePerHour() float64 {
+	if x != nil {
+		return x.PricePerHour
+	}
+	return 0
+}
+
+func (x *UpdateParkingLotRequest) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+type UpdateParkingLotResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Parkings      []*Parking             `protobuf:"bytes,1,rep,name=parkings,proto3" json:"parkings,omitempty"`
+	ParkingLot    *ParkingLot            `protobuf:"bytes,1,opt,name=parking_lot,json=parkingLot,proto3" json:"parking_lot,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ParkingListResponse) Reset() {
-	*x = ParkingListResponse{}
+func (x *UpdateParkingLotResponse) Reset() {
+	*x = UpdateParkingLotResponse{}
 	mi := &file_parking_v1_parking_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ParkingListResponse) String() string {
+func (x *UpdateParkingLotResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ParkingListResponse) ProtoMessage() {}
+func (*UpdateParkingLotResponse) ProtoMessage() {}
 
-func (x *ParkingListResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateParkingLotResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -501,40 +734,39 @@ func (x *ParkingListResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ParkingListResponse.ProtoReflect.Descriptor instead.
-func (*ParkingListResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateParkingLotResponse.ProtoReflect.Descriptor instead.
+func (*UpdateParkingLotResponse) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ParkingListResponse) GetParkings() []*Parking {
+func (x *UpdateParkingLotResponse) GetParkingLot() *ParkingLot {
 	if x != nil {
-		return x.Parkings
+		return x.ParkingLot
 	}
 	return nil
 }
 
-type CreateSpotRequest struct {
+type DeleteParkingLotRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ParkingId     int64                  `protobuf:"varint,1,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	Number        string                 `protobuf:"bytes,2,opt,name=number,proto3" json:"number,omitempty"`
+	ParkingLotId  string                 `protobuf:"bytes,1,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateSpotRequest) Reset() {
-	*x = CreateSpotRequest{}
+func (x *DeleteParkingLotRequest) Reset() {
+	*x = DeleteParkingLotRequest{}
 	mi := &file_parking_v1_parking_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateSpotRequest) String() string {
+func (x *DeleteParkingLotRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateSpotRequest) ProtoMessage() {}
+func (*DeleteParkingLotRequest) ProtoMessage() {}
 
-func (x *CreateSpotRequest) ProtoReflect() protoreflect.Message {
+func (x *DeleteParkingLotRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -546,46 +778,39 @@ func (x *CreateSpotRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateSpotRequest.ProtoReflect.Descriptor instead.
-func (*CreateSpotRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteParkingLotRequest.ProtoReflect.Descriptor instead.
+func (*DeleteParkingLotRequest) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *CreateSpotRequest) GetParkingId() int64 {
+func (x *DeleteParkingLotRequest) GetParkingLotId() string {
 	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-func (x *CreateSpotRequest) GetNumber() string {
-	if x != nil {
-		return x.Number
+		return x.ParkingLotId
 	}
 	return ""
 }
 
-type GetSpotRequest struct {
+type DeleteParkingLotResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetSpotRequest) Reset() {
-	*x = GetSpotRequest{}
+func (x *DeleteParkingLotResponse) Reset() {
+	*x = DeleteParkingLotResponse{}
 	mi := &file_parking_v1_parking_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetSpotRequest) String() string {
+func (x *DeleteParkingLotResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetSpotRequest) ProtoMessage() {}
+func (*DeleteParkingLotResponse) ProtoMessage() {}
 
-func (x *GetSpotRequest) ProtoReflect() protoreflect.Message {
+func (x *DeleteParkingLotResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_parking_v1_parking_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -597,628 +822,920 @@ func (x *GetSpotRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetSpotRequest.ProtoReflect.Descriptor instead.
-func (*GetSpotRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteParkingLotResponse.ProtoReflect.Descriptor instead.
+func (*DeleteParkingLotResponse) Descriptor() ([]byte, []int) {
 	return file_parking_v1_parking_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *GetSpotRequest) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-type GetSpotsByParkingRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ParkingId     int64                  `protobuf:"varint,1,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetSpotsByParkingRequest) Reset() {
-	*x = GetSpotsByParkingRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetSpotsByParkingRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetSpotsByParkingRequest) ProtoMessage() {}
-
-func (x *GetSpotsByParkingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetSpotsByParkingRequest.ProtoReflect.Descriptor instead.
-func (*GetSpotsByParkingRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *GetSpotsByParkingRequest) GetParkingId() int64 {
-	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-type UpdateSpotStatusRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SpotId        int64                  `protobuf:"varint,1,opt,name=spot_id,json=spotId,proto3" json:"spot_id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateSpotStatusRequest) Reset() {
-	*x = UpdateSpotStatusRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateSpotStatusRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateSpotStatusRequest) ProtoMessage() {}
-
-func (x *UpdateSpotStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateSpotStatusRequest.ProtoReflect.Descriptor instead.
-func (*UpdateSpotStatusRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *UpdateSpotStatusRequest) GetSpotId() int64 {
-	if x != nil {
-		return x.SpotId
-	}
-	return 0
-}
-
-func (x *UpdateSpotStatusRequest) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-type SpotActionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SpotId        int64                  `protobuf:"varint,1,opt,name=spot_id,json=spotId,proto3" json:"spot_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SpotActionRequest) Reset() {
-	*x = SpotActionRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SpotActionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SpotActionRequest) ProtoMessage() {}
-
-func (x *SpotActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SpotActionRequest.ProtoReflect.Descriptor instead.
-func (*SpotActionRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *SpotActionRequest) GetSpotId() int64 {
-	if x != nil {
-		return x.SpotId
-	}
-	return 0
-}
-
-type DeleteSpotRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SpotId        int64                  `protobuf:"varint,1,opt,name=spot_id,json=spotId,proto3" json:"spot_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteSpotRequest) Reset() {
-	*x = DeleteSpotRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteSpotRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteSpotRequest) ProtoMessage() {}
-
-func (x *DeleteSpotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteSpotRequest.ProtoReflect.Descriptor instead.
-func (*DeleteSpotRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *DeleteSpotRequest) GetSpotId() int64 {
-	if x != nil {
-		return x.SpotId
-	}
-	return 0
-}
-
-type SpotResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Spot          *Spot                  `protobuf:"bytes,1,opt,name=spot,proto3" json:"spot,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SpotResponse) Reset() {
-	*x = SpotResponse{}
-	mi := &file_parking_v1_parking_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SpotResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SpotResponse) ProtoMessage() {}
-
-func (x *SpotResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SpotResponse.ProtoReflect.Descriptor instead.
-func (*SpotResponse) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *SpotResponse) GetSpot() *Spot {
-	if x != nil {
-		return x.Spot
-	}
-	return nil
-}
-
-type SpotListResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Spots         []*Spot                `protobuf:"bytes,1,rep,name=spots,proto3" json:"spots,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SpotListResponse) Reset() {
-	*x = SpotListResponse{}
-	mi := &file_parking_v1_parking_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SpotListResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SpotListResponse) ProtoMessage() {}
-
-func (x *SpotListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SpotListResponse.ProtoReflect.Descriptor instead.
-func (*SpotListResponse) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *SpotListResponse) GetSpots() []*Spot {
-	if x != nil {
-		return x.Spots
-	}
-	return nil
-}
-
-type CreateTariffRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ParkingId     int64                  `protobuf:"varint,1,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	PricePerHour  float64                `protobuf:"fixed64,2,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateTariffRequest) Reset() {
-	*x = CreateTariffRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateTariffRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateTariffRequest) ProtoMessage() {}
-
-func (x *CreateTariffRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateTariffRequest.ProtoReflect.Descriptor instead.
-func (*CreateTariffRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *CreateTariffRequest) GetParkingId() int64 {
-	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-func (x *CreateTariffRequest) GetPricePerHour() float64 {
-	if x != nil {
-		return x.PricePerHour
-	}
-	return 0
-}
-
-type GetTariffRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ParkingId     int64                  `protobuf:"varint,1,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetTariffRequest) Reset() {
-	*x = GetTariffRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetTariffRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTariffRequest) ProtoMessage() {}
-
-func (x *GetTariffRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTariffRequest.ProtoReflect.Descriptor instead.
-func (*GetTariffRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *GetTariffRequest) GetParkingId() int64 {
-	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-type UpdateTariffRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ParkingId     int64                  `protobuf:"varint,1,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	PricePerHour  float64                `protobuf:"fixed64,2,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateTariffRequest) Reset() {
-	*x = UpdateTariffRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateTariffRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateTariffRequest) ProtoMessage() {}
-
-func (x *UpdateTariffRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateTariffRequest.ProtoReflect.Descriptor instead.
-func (*UpdateTariffRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{19}
-}
-
-func (x *UpdateTariffRequest) GetParkingId() int64 {
-	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-func (x *UpdateTariffRequest) GetPricePerHour() float64 {
-	if x != nil {
-		return x.PricePerHour
-	}
-	return 0
-}
-
-type CalculatePriceRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ParkingId     int64                  `protobuf:"varint,1,opt,name=parking_id,json=parkingId,proto3" json:"parking_id,omitempty"`
-	Hours         float64                `protobuf:"fixed64,2,opt,name=hours,proto3" json:"hours,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CalculatePriceRequest) Reset() {
-	*x = CalculatePriceRequest{}
-	mi := &file_parking_v1_parking_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CalculatePriceRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CalculatePriceRequest) ProtoMessage() {}
-
-func (x *CalculatePriceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CalculatePriceRequest.ProtoReflect.Descriptor instead.
-func (*CalculatePriceRequest) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *CalculatePriceRequest) GetParkingId() int64 {
-	if x != nil {
-		return x.ParkingId
-	}
-	return 0
-}
-
-func (x *CalculatePriceRequest) GetHours() float64 {
-	if x != nil {
-		return x.Hours
-	}
-	return 0
-}
-
-type TariffResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tariff        *Tariff                `protobuf:"bytes,1,opt,name=tariff,proto3" json:"tariff,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TariffResponse) Reset() {
-	*x = TariffResponse{}
-	mi := &file_parking_v1_parking_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TariffResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TariffResponse) ProtoMessage() {}
-
-func (x *TariffResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TariffResponse.ProtoReflect.Descriptor instead.
-func (*TariffResponse) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{21}
-}
-
-func (x *TariffResponse) GetTariff() *Tariff {
-	if x != nil {
-		return x.Tariff
-	}
-	return nil
-}
-
-type CalculatePriceResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TotalPrice    float64                `protobuf:"fixed64,1,opt,name=total_price,json=totalPrice,proto3" json:"total_price,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CalculatePriceResponse) Reset() {
-	*x = CalculatePriceResponse{}
-	mi := &file_parking_v1_parking_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CalculatePriceResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CalculatePriceResponse) ProtoMessage() {}
-
-func (x *CalculatePriceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CalculatePriceResponse.ProtoReflect.Descriptor instead.
-func (*CalculatePriceResponse) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *CalculatePriceResponse) GetTotalPrice() float64 {
-	if x != nil {
-		return x.TotalPrice
-	}
-	return 0
-}
-
-type ActionResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ActionResponse) Reset() {
-	*x = ActionResponse{}
-	mi := &file_parking_v1_parking_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ActionResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ActionResponse) ProtoMessage() {}
-
-func (x *ActionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_parking_v1_parking_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ActionResponse.ProtoReflect.Descriptor instead.
-func (*ActionResponse) Descriptor() ([]byte, []int) {
-	return file_parking_v1_parking_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *ActionResponse) GetSuccess() bool {
+func (x *DeleteParkingLotResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
 	}
 	return false
 }
 
-func (x *ActionResponse) GetMessage() string {
+type ListParkingLotsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	ActiveOnly    bool                   `protobuf:"varint,3,opt,name=active_only,json=activeOnly,proto3" json:"active_only,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListParkingLotsRequest) Reset() {
+	*x = ListParkingLotsRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListParkingLotsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListParkingLotsRequest) ProtoMessage() {}
+
+func (x *ListParkingLotsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[11]
 	if x != nil {
-		return x.Message
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListParkingLotsRequest.ProtoReflect.Descriptor instead.
+func (*ListParkingLotsRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListParkingLotsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListParkingLotsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListParkingLotsRequest) GetActiveOnly() bool {
+	if x != nil {
+		return x.ActiveOnly
+	}
+	return false
+}
+
+type ListParkingLotsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingLots   []*ParkingLot          `protobuf:"bytes,1,rep,name=parking_lots,json=parkingLots,proto3" json:"parking_lots,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListParkingLotsResponse) Reset() {
+	*x = ListParkingLotsResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListParkingLotsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListParkingLotsResponse) ProtoMessage() {}
+
+func (x *ListParkingLotsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListParkingLotsResponse.ProtoReflect.Descriptor instead.
+func (*ListParkingLotsResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListParkingLotsResponse) GetParkingLots() []*ParkingLot {
+	if x != nil {
+		return x.ParkingLots
+	}
+	return nil
+}
+
+func (x *ListParkingLotsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type CreateParkingSpotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingLotId  string                 `protobuf:"bytes,1,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Level         string                 `protobuf:"bytes,3,opt,name=level,proto3" json:"level,omitempty"`
+	SpotType      string                 `protobuf:"bytes,4,opt,name=spot_type,json=spotType,proto3" json:"spot_type,omitempty"`
+	VehicleType   string                 `protobuf:"bytes,5,opt,name=vehicle_type,json=vehicleType,proto3" json:"vehicle_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateParkingSpotRequest) Reset() {
+	*x = CreateParkingSpotRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateParkingSpotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateParkingSpotRequest) ProtoMessage() {}
+
+func (x *CreateParkingSpotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateParkingSpotRequest.ProtoReflect.Descriptor instead.
+func (*CreateParkingSpotRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CreateParkingSpotRequest) GetParkingLotId() string {
+	if x != nil {
+		return x.ParkingLotId
 	}
 	return ""
+}
+
+func (x *CreateParkingSpotRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *CreateParkingSpotRequest) GetLevel() string {
+	if x != nil {
+		return x.Level
+	}
+	return ""
+}
+
+func (x *CreateParkingSpotRequest) GetSpotType() string {
+	if x != nil {
+		return x.SpotType
+	}
+	return ""
+}
+
+func (x *CreateParkingSpotRequest) GetVehicleType() string {
+	if x != nil {
+		return x.VehicleType
+	}
+	return ""
+}
+
+type CreateParkingSpotResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingSpot   *ParkingSpot           `protobuf:"bytes,1,opt,name=parking_spot,json=parkingSpot,proto3" json:"parking_spot,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateParkingSpotResponse) Reset() {
+	*x = CreateParkingSpotResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateParkingSpotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateParkingSpotResponse) ProtoMessage() {}
+
+func (x *CreateParkingSpotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateParkingSpotResponse.ProtoReflect.Descriptor instead.
+func (*CreateParkingSpotResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *CreateParkingSpotResponse) GetParkingSpot() *ParkingSpot {
+	if x != nil {
+		return x.ParkingSpot
+	}
+	return nil
+}
+
+type GetParkingSpotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingSpotId string                 `protobuf:"bytes,1,opt,name=parking_spot_id,json=parkingSpotId,proto3" json:"parking_spot_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetParkingSpotRequest) Reset() {
+	*x = GetParkingSpotRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetParkingSpotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetParkingSpotRequest) ProtoMessage() {}
+
+func (x *GetParkingSpotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetParkingSpotRequest.ProtoReflect.Descriptor instead.
+func (*GetParkingSpotRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetParkingSpotRequest) GetParkingSpotId() string {
+	if x != nil {
+		return x.ParkingSpotId
+	}
+	return ""
+}
+
+type GetParkingSpotResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingSpot   *ParkingSpot           `protobuf:"bytes,1,opt,name=parking_spot,json=parkingSpot,proto3" json:"parking_spot,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetParkingSpotResponse) Reset() {
+	*x = GetParkingSpotResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetParkingSpotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetParkingSpotResponse) ProtoMessage() {}
+
+func (x *GetParkingSpotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetParkingSpotResponse.ProtoReflect.Descriptor instead.
+func (*GetParkingSpotResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetParkingSpotResponse) GetParkingSpot() *ParkingSpot {
+	if x != nil {
+		return x.ParkingSpot
+	}
+	return nil
+}
+
+type UpdateParkingSpotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingSpotId string                 `protobuf:"bytes,1,opt,name=parking_spot_id,json=parkingSpotId,proto3" json:"parking_spot_id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Level         string                 `protobuf:"bytes,3,opt,name=level,proto3" json:"level,omitempty"`
+	SpotType      string                 `protobuf:"bytes,4,opt,name=spot_type,json=spotType,proto3" json:"spot_type,omitempty"`
+	VehicleType   string                 `protobuf:"bytes,5,opt,name=vehicle_type,json=vehicleType,proto3" json:"vehicle_type,omitempty"`
+	IsActive      bool                   `protobuf:"varint,6,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateParkingSpotRequest) Reset() {
+	*x = UpdateParkingSpotRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateParkingSpotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateParkingSpotRequest) ProtoMessage() {}
+
+func (x *UpdateParkingSpotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateParkingSpotRequest.ProtoReflect.Descriptor instead.
+func (*UpdateParkingSpotRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *UpdateParkingSpotRequest) GetParkingSpotId() string {
+	if x != nil {
+		return x.ParkingSpotId
+	}
+	return ""
+}
+
+func (x *UpdateParkingSpotRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *UpdateParkingSpotRequest) GetLevel() string {
+	if x != nil {
+		return x.Level
+	}
+	return ""
+}
+
+func (x *UpdateParkingSpotRequest) GetSpotType() string {
+	if x != nil {
+		return x.SpotType
+	}
+	return ""
+}
+
+func (x *UpdateParkingSpotRequest) GetVehicleType() string {
+	if x != nil {
+		return x.VehicleType
+	}
+	return ""
+}
+
+func (x *UpdateParkingSpotRequest) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+type UpdateParkingSpotResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingSpot   *ParkingSpot           `protobuf:"bytes,1,opt,name=parking_spot,json=parkingSpot,proto3" json:"parking_spot,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateParkingSpotResponse) Reset() {
+	*x = UpdateParkingSpotResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateParkingSpotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateParkingSpotResponse) ProtoMessage() {}
+
+func (x *UpdateParkingSpotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateParkingSpotResponse.ProtoReflect.Descriptor instead.
+func (*UpdateParkingSpotResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *UpdateParkingSpotResponse) GetParkingSpot() *ParkingSpot {
+	if x != nil {
+		return x.ParkingSpot
+	}
+	return nil
+}
+
+type DeleteParkingSpotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingSpotId string                 `protobuf:"bytes,1,opt,name=parking_spot_id,json=parkingSpotId,proto3" json:"parking_spot_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteParkingSpotRequest) Reset() {
+	*x = DeleteParkingSpotRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteParkingSpotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteParkingSpotRequest) ProtoMessage() {}
+
+func (x *DeleteParkingSpotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteParkingSpotRequest.ProtoReflect.Descriptor instead.
+func (*DeleteParkingSpotRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *DeleteParkingSpotRequest) GetParkingSpotId() string {
+	if x != nil {
+		return x.ParkingSpotId
+	}
+	return ""
+}
+
+type DeleteParkingSpotResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteParkingSpotResponse) Reset() {
+	*x = DeleteParkingSpotResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteParkingSpotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteParkingSpotResponse) ProtoMessage() {}
+
+func (x *DeleteParkingSpotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteParkingSpotResponse.ProtoReflect.Descriptor instead.
+func (*DeleteParkingSpotResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *DeleteParkingSpotResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ListParkingSpotsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingLotId  string                 `protobuf:"bytes,1,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	OnlyAvailable bool                   `protobuf:"varint,4,opt,name=only_available,json=onlyAvailable,proto3" json:"only_available,omitempty"`
+	VehicleType   string                 `protobuf:"bytes,5,opt,name=vehicle_type,json=vehicleType,proto3" json:"vehicle_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListParkingSpotsRequest) Reset() {
+	*x = ListParkingSpotsRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListParkingSpotsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListParkingSpotsRequest) ProtoMessage() {}
+
+func (x *ListParkingSpotsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListParkingSpotsRequest.ProtoReflect.Descriptor instead.
+func (*ListParkingSpotsRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ListParkingSpotsRequest) GetParkingLotId() string {
+	if x != nil {
+		return x.ParkingLotId
+	}
+	return ""
+}
+
+func (x *ListParkingSpotsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListParkingSpotsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListParkingSpotsRequest) GetOnlyAvailable() bool {
+	if x != nil {
+		return x.OnlyAvailable
+	}
+	return false
+}
+
+func (x *ListParkingSpotsRequest) GetVehicleType() string {
+	if x != nil {
+		return x.VehicleType
+	}
+	return ""
+}
+
+type ListParkingSpotsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ParkingSpots  []*ParkingSpot         `protobuf:"bytes,1,rep,name=parking_spots,json=parkingSpots,proto3" json:"parking_spots,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListParkingSpotsResponse) Reset() {
+	*x = ListParkingSpotsResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListParkingSpotsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListParkingSpotsResponse) ProtoMessage() {}
+
+func (x *ListParkingSpotsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListParkingSpotsResponse.ProtoReflect.Descriptor instead.
+func (*ListParkingSpotsResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ListParkingSpotsResponse) GetParkingSpots() []*ParkingSpot {
+	if x != nil {
+		return x.ParkingSpots
+	}
+	return nil
+}
+
+func (x *ListParkingSpotsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type ReserveSpotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ParkingLotId  string                 `protobuf:"bytes,2,opt,name=parking_lot_id,json=parkingLotId,proto3" json:"parking_lot_id,omitempty"`
+	ParkingSpotId string                 `protobuf:"bytes,3,opt,name=parking_spot_id,json=parkingSpotId,proto3" json:"parking_spot_id,omitempty"`
+	VehicleNumber string                 `protobuf:"bytes,4,opt,name=vehicle_number,json=vehicleNumber,proto3" json:"vehicle_number,omitempty"`
+	StartsAt      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=starts_at,json=startsAt,proto3" json:"starts_at,omitempty"`
+	EndsAt        *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=ends_at,json=endsAt,proto3" json:"ends_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReserveSpotRequest) Reset() {
+	*x = ReserveSpotRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReserveSpotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReserveSpotRequest) ProtoMessage() {}
+
+func (x *ReserveSpotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReserveSpotRequest.ProtoReflect.Descriptor instead.
+func (*ReserveSpotRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ReserveSpotRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ReserveSpotRequest) GetParkingLotId() string {
+	if x != nil {
+		return x.ParkingLotId
+	}
+	return ""
+}
+
+func (x *ReserveSpotRequest) GetParkingSpotId() string {
+	if x != nil {
+		return x.ParkingSpotId
+	}
+	return ""
+}
+
+func (x *ReserveSpotRequest) GetVehicleNumber() string {
+	if x != nil {
+		return x.VehicleNumber
+	}
+	return ""
+}
+
+func (x *ReserveSpotRequest) GetStartsAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartsAt
+	}
+	return nil
+}
+
+func (x *ReserveSpotRequest) GetEndsAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndsAt
+	}
+	return nil
+}
+
+type ReserveSpotResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Reservation   *Reservation           `protobuf:"bytes,1,opt,name=reservation,proto3" json:"reservation,omitempty"`
+	ParkingSpot   *ParkingSpot           `protobuf:"bytes,2,opt,name=parking_spot,json=parkingSpot,proto3" json:"parking_spot,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReserveSpotResponse) Reset() {
+	*x = ReserveSpotResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReserveSpotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReserveSpotResponse) ProtoMessage() {}
+
+func (x *ReserveSpotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReserveSpotResponse.ProtoReflect.Descriptor instead.
+func (*ReserveSpotResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ReserveSpotResponse) GetReservation() *Reservation {
+	if x != nil {
+		return x.Reservation
+	}
+	return nil
+}
+
+func (x *ReserveSpotResponse) GetParkingSpot() *ParkingSpot {
+	if x != nil {
+		return x.ParkingSpot
+	}
+	return nil
+}
+
+type ReleaseSpotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReservationId string                 `protobuf:"bytes,1,opt,name=reservation_id,json=reservationId,proto3" json:"reservation_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReleaseSpotRequest) Reset() {
+	*x = ReleaseSpotRequest{}
+	mi := &file_parking_v1_parking_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReleaseSpotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReleaseSpotRequest) ProtoMessage() {}
+
+func (x *ReleaseSpotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReleaseSpotRequest.ProtoReflect.Descriptor instead.
+func (*ReleaseSpotRequest) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ReleaseSpotRequest) GetReservationId() string {
+	if x != nil {
+		return x.ReservationId
+	}
+	return ""
+}
+
+func (x *ReleaseSpotRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type ReleaseSpotResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Reservation   *Reservation           `protobuf:"bytes,2,opt,name=reservation,proto3" json:"reservation,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReleaseSpotResponse) Reset() {
+	*x = ReleaseSpotResponse{}
+	mi := &file_parking_v1_parking_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReleaseSpotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReleaseSpotResponse) ProtoMessage() {}
+
+func (x *ReleaseSpotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_parking_v1_parking_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReleaseSpotResponse.ProtoReflect.Descriptor instead.
+func (*ReleaseSpotResponse) Descriptor() ([]byte, []int) {
+	return file_parking_v1_parking_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ReleaseSpotResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *ReleaseSpotResponse) GetReservation() *Reservation {
+	if x != nil {
+		return x.Reservation
+	}
+	return nil
 }
 
 var File_parking_v1_parking_proto protoreflect.FileDescriptor
@@ -1226,106 +1743,159 @@ var File_parking_v1_parking_proto protoreflect.FileDescriptor
 const file_parking_v1_parking_proto_rawDesc = "" +
 	"\n" +
 	"\x18parking/v1/parking.proto\x12\n" +
-	"parking.v1\"\x17\n" +
-	"\x15GetAllParkingsRequest\"\x87\x01\n" +
-	"\aParking\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"parking.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x87\x03\n" +
+	"\n" +
+	"ParkingLot\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
-	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x1f\n" +
-	"\vtotal_spots\x18\x04 \x01(\x05R\n" +
-	"totalSpots\x12\x1d\n" +
+	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x1a\n" +
+	"\blatitude\x18\x04 \x01(\x01R\blatitude\x12\x1c\n" +
+	"\tlongitude\x18\x05 \x01(\x01R\tlongitude\x12\x1f\n" +
+	"\vtotal_spots\x18\x06 \x01(\x05R\n" +
+	"totalSpots\x12'\n" +
+	"\x0favailable_spots\x18\a \x01(\x05R\x0eavailableSpots\x12$\n" +
+	"\x0eprice_per_hour\x18\b \x01(\x01R\fpricePerHour\x12\x1b\n" +
+	"\tis_active\x18\t \x01(\bR\bisActive\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\tR\tcreatedAt\"\x84\x01\n" +
-	"\x04Spot\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"parking_id\x18\x02 \x01(\x03R\tparkingId\x12\x16\n" +
-	"\x06number\x18\x03 \x01(\tR\x06number\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1d\n" +
+	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x82\x03\n" +
+	"\vParkingSpot\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12$\n" +
+	"\x0eparking_lot_id\x18\x02 \x01(\tR\fparkingLotId\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12\x14\n" +
+	"\x05level\x18\x04 \x01(\tR\x05level\x12\x1b\n" +
+	"\tspot_type\x18\x05 \x01(\tR\bspotType\x12!\n" +
+	"\fvehicle_type\x18\x06 \x01(\tR\vvehicleType\x12\x1b\n" +
+	"\tis_active\x18\a \x01(\bR\bisActive\x12\x1f\n" +
+	"\vis_occupied\x18\b \x01(\bR\n" +
+	"isOccupied\x12\x1f\n" +
+	"\vis_reserved\x18\t \x01(\bR\n" +
+	"isReserved\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\tR\tcreatedAt\"|\n" +
-	"\x06Tariff\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"parking_id\x18\x02 \x01(\x03R\tparkingId\x12$\n" +
-	"\x0eprice_per_hour\x18\x03 \x01(\x01R\fpricePerHour\x12\x1d\n" +
+	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa7\x03\n" +
+	"\vReservation\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12$\n" +
+	"\x0eparking_lot_id\x18\x03 \x01(\tR\fparkingLotId\x12&\n" +
+	"\x0fparking_spot_id\x18\x04 \x01(\tR\rparkingSpotId\x12%\n" +
+	"\x0evehicle_number\x18\x05 \x01(\tR\rvehicleNumber\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\x127\n" +
+	"\tstarts_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bstartsAt\x123\n" +
+	"\aends_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x06endsAt\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\tR\tcreatedAt\"e\n" +
-	"\x14CreateParkingRequest\x12\x12\n" +
+	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xc8\x01\n" +
+	"\x17CreateParkingLotRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x1f\n" +
-	"\vtotal_spots\x18\x03 \x01(\x05R\n" +
-	"totalSpots\"#\n" +
-	"\x11GetParkingRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"&\n" +
-	"\x14DeleteParkingRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"@\n" +
-	"\x0fParkingResponse\x12-\n" +
-	"\aparking\x18\x01 \x01(\v2\x13.parking.v1.ParkingR\aparking\"F\n" +
-	"\x13ParkingListResponse\x12/\n" +
-	"\bparkings\x18\x01 \x03(\v2\x13.parking.v1.ParkingR\bparkings\"J\n" +
-	"\x11CreateSpotRequest\x12\x1d\n" +
-	"\n" +
-	"parking_id\x18\x01 \x01(\x03R\tparkingId\x12\x16\n" +
-	"\x06number\x18\x02 \x01(\tR\x06number\" \n" +
-	"\x0eGetSpotRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"9\n" +
-	"\x18GetSpotsByParkingRequest\x12\x1d\n" +
-	"\n" +
-	"parking_id\x18\x01 \x01(\x03R\tparkingId\"J\n" +
-	"\x17UpdateSpotStatusRequest\x12\x17\n" +
-	"\aspot_id\x18\x01 \x01(\x03R\x06spotId\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\",\n" +
-	"\x11SpotActionRequest\x12\x17\n" +
-	"\aspot_id\x18\x01 \x01(\x03R\x06spotId\",\n" +
-	"\x11DeleteSpotRequest\x12\x17\n" +
-	"\aspot_id\x18\x01 \x01(\x03R\x06spotId\"4\n" +
-	"\fSpotResponse\x12$\n" +
-	"\x04spot\x18\x01 \x01(\v2\x10.parking.v1.SpotR\x04spot\":\n" +
-	"\x10SpotListResponse\x12&\n" +
-	"\x05spots\x18\x01 \x03(\v2\x10.parking.v1.SpotR\x05spots\"Z\n" +
-	"\x13CreateTariffRequest\x12\x1d\n" +
-	"\n" +
-	"parking_id\x18\x01 \x01(\x03R\tparkingId\x12$\n" +
-	"\x0eprice_per_hour\x18\x02 \x01(\x01R\fpricePerHour\"1\n" +
-	"\x10GetTariffRequest\x12\x1d\n" +
-	"\n" +
-	"parking_id\x18\x01 \x01(\x03R\tparkingId\"Z\n" +
-	"\x13UpdateTariffRequest\x12\x1d\n" +
-	"\n" +
-	"parking_id\x18\x01 \x01(\x03R\tparkingId\x12$\n" +
-	"\x0eprice_per_hour\x18\x02 \x01(\x01R\fpricePerHour\"L\n" +
-	"\x15CalculatePriceRequest\x12\x1d\n" +
-	"\n" +
-	"parking_id\x18\x01 \x01(\x03R\tparkingId\x12\x14\n" +
-	"\x05hours\x18\x02 \x01(\x01R\x05hours\"<\n" +
-	"\x0eTariffResponse\x12*\n" +
-	"\x06tariff\x18\x01 \x01(\v2\x12.parking.v1.TariffR\x06tariff\"9\n" +
-	"\x16CalculatePriceResponse\x12\x1f\n" +
-	"\vtotal_price\x18\x01 \x01(\x01R\n" +
-	"totalPrice\"D\n" +
-	"\x0eActionResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x9c\t\n" +
-	"\x0eParkingService\x12N\n" +
-	"\rCreateParking\x12 .parking.v1.CreateParkingRequest\x1a\x1b.parking.v1.ParkingResponse\x12H\n" +
-	"\n" +
-	"GetParking\x12\x1d.parking.v1.GetParkingRequest\x1a\x1b.parking.v1.ParkingResponse\x12T\n" +
-	"\x0eGetAllParkings\x12!.parking.v1.GetAllParkingsRequest\x1a\x1f.parking.v1.ParkingListResponse\x12M\n" +
-	"\rDeleteParking\x12 .parking.v1.DeleteParkingRequest\x1a\x1a.parking.v1.ActionResponse\x12E\n" +
-	"\n" +
-	"CreateSpot\x12\x1d.parking.v1.CreateSpotRequest\x1a\x18.parking.v1.SpotResponse\x12?\n" +
-	"\aGetSpot\x12\x1a.parking.v1.GetSpotRequest\x1a\x18.parking.v1.SpotResponse\x12W\n" +
-	"\x11GetSpotsByParking\x12$.parking.v1.GetSpotsByParkingRequest\x1a\x1c.parking.v1.SpotListResponse\x12S\n" +
-	"\x10UpdateSpotStatus\x12#.parking.v1.UpdateSpotStatusRequest\x1a\x1a.parking.v1.ActionResponse\x12H\n" +
-	"\vReserveSpot\x12\x1d.parking.v1.SpotActionRequest\x1a\x1a.parking.v1.ActionResponse\x12H\n" +
-	"\vReleaseSpot\x12\x1d.parking.v1.SpotActionRequest\x1a\x1a.parking.v1.ActionResponse\x12G\n" +
-	"\n" +
-	"DeleteSpot\x12\x1d.parking.v1.DeleteSpotRequest\x1a\x1a.parking.v1.ActionResponse\x12K\n" +
-	"\fCreateTariff\x12\x1f.parking.v1.CreateTariffRequest\x1a\x1a.parking.v1.TariffResponse\x12E\n" +
-	"\tGetTariff\x12\x1c.parking.v1.GetTariffRequest\x1a\x1a.parking.v1.TariffResponse\x12K\n" +
-	"\fUpdateTariff\x12\x1f.parking.v1.UpdateTariffRequest\x1a\x1a.parking.v1.ActionResponse\x12W\n" +
-	"\x0eCalculatePrice\x12!.parking.v1.CalculatePriceRequest\x1a\".parking.v1.CalculatePriceResponseB\xa6\x01\n" +
+	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x1a\n" +
+	"\blatitude\x18\x03 \x01(\x01R\blatitude\x12\x1c\n" +
+	"\tlongitude\x18\x04 \x01(\x01R\tlongitude\x12\x1f\n" +
+	"\vtotal_spots\x18\x05 \x01(\x05R\n" +
+	"totalSpots\x12$\n" +
+	"\x0eprice_per_hour\x18\x06 \x01(\x01R\fpricePerHour\"S\n" +
+	"\x18CreateParkingLotResponse\x127\n" +
+	"\vparking_lot\x18\x01 \x01(\v2\x16.parking.v1.ParkingLotR\n" +
+	"parkingLot\"<\n" +
+	"\x14GetParkingLotRequest\x12$\n" +
+	"\x0eparking_lot_id\x18\x01 \x01(\tR\fparkingLotId\"P\n" +
+	"\x15GetParkingLotResponse\x127\n" +
+	"\vparking_lot\x18\x01 \x01(\v2\x16.parking.v1.ParkingLotR\n" +
+	"parkingLot\"\x8b\x02\n" +
+	"\x17UpdateParkingLotRequest\x12$\n" +
+	"\x0eparking_lot_id\x18\x01 \x01(\tR\fparkingLotId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
+	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x1a\n" +
+	"\blatitude\x18\x04 \x01(\x01R\blatitude\x12\x1c\n" +
+	"\tlongitude\x18\x05 \x01(\x01R\tlongitude\x12\x1f\n" +
+	"\vtotal_spots\x18\x06 \x01(\x05R\n" +
+	"totalSpots\x12$\n" +
+	"\x0eprice_per_hour\x18\a \x01(\x01R\fpricePerHour\x12\x1b\n" +
+	"\tis_active\x18\b \x01(\bR\bisActive\"S\n" +
+	"\x18UpdateParkingLotResponse\x127\n" +
+	"\vparking_lot\x18\x01 \x01(\v2\x16.parking.v1.ParkingLotR\n" +
+	"parkingLot\"?\n" +
+	"\x17DeleteParkingLotRequest\x12$\n" +
+	"\x0eparking_lot_id\x18\x01 \x01(\tR\fparkingLotId\"4\n" +
+	"\x18DeleteParkingLotResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"j\n" +
+	"\x16ListParkingLotsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\vactive_only\x18\x03 \x01(\bR\n" +
+	"activeOnly\"j\n" +
+	"\x17ListParkingLotsResponse\x129\n" +
+	"\fparking_lots\x18\x01 \x03(\v2\x16.parking.v1.ParkingLotR\vparkingLots\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"\xaa\x01\n" +
+	"\x18CreateParkingSpotRequest\x12$\n" +
+	"\x0eparking_lot_id\x18\x01 \x01(\tR\fparkingLotId\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x14\n" +
+	"\x05level\x18\x03 \x01(\tR\x05level\x12\x1b\n" +
+	"\tspot_type\x18\x04 \x01(\tR\bspotType\x12!\n" +
+	"\fvehicle_type\x18\x05 \x01(\tR\vvehicleType\"W\n" +
+	"\x19CreateParkingSpotResponse\x12:\n" +
+	"\fparking_spot\x18\x01 \x01(\v2\x17.parking.v1.ParkingSpotR\vparkingSpot\"?\n" +
+	"\x15GetParkingSpotRequest\x12&\n" +
+	"\x0fparking_spot_id\x18\x01 \x01(\tR\rparkingSpotId\"T\n" +
+	"\x16GetParkingSpotResponse\x12:\n" +
+	"\fparking_spot\x18\x01 \x01(\v2\x17.parking.v1.ParkingSpotR\vparkingSpot\"\xc9\x01\n" +
+	"\x18UpdateParkingSpotRequest\x12&\n" +
+	"\x0fparking_spot_id\x18\x01 \x01(\tR\rparkingSpotId\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x14\n" +
+	"\x05level\x18\x03 \x01(\tR\x05level\x12\x1b\n" +
+	"\tspot_type\x18\x04 \x01(\tR\bspotType\x12!\n" +
+	"\fvehicle_type\x18\x05 \x01(\tR\vvehicleType\x12\x1b\n" +
+	"\tis_active\x18\x06 \x01(\bR\bisActive\"W\n" +
+	"\x19UpdateParkingSpotResponse\x12:\n" +
+	"\fparking_spot\x18\x01 \x01(\v2\x17.parking.v1.ParkingSpotR\vparkingSpot\"B\n" +
+	"\x18DeleteParkingSpotRequest\x12&\n" +
+	"\x0fparking_spot_id\x18\x01 \x01(\tR\rparkingSpotId\"5\n" +
+	"\x19DeleteParkingSpotResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xba\x01\n" +
+	"\x17ListParkingSpotsRequest\x12$\n" +
+	"\x0eparking_lot_id\x18\x01 \x01(\tR\fparkingLotId\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12%\n" +
+	"\x0eonly_available\x18\x04 \x01(\bR\ronlyAvailable\x12!\n" +
+	"\fvehicle_type\x18\x05 \x01(\tR\vvehicleType\"n\n" +
+	"\x18ListParkingSpotsResponse\x12<\n" +
+	"\rparking_spots\x18\x01 \x03(\v2\x17.parking.v1.ParkingSpotR\fparkingSpots\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"\x90\x02\n" +
+	"\x12ReserveSpotRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12$\n" +
+	"\x0eparking_lot_id\x18\x02 \x01(\tR\fparkingLotId\x12&\n" +
+	"\x0fparking_spot_id\x18\x03 \x01(\tR\rparkingSpotId\x12%\n" +
+	"\x0evehicle_number\x18\x04 \x01(\tR\rvehicleNumber\x127\n" +
+	"\tstarts_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bstartsAt\x123\n" +
+	"\aends_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x06endsAt\"\x8c\x01\n" +
+	"\x13ReserveSpotResponse\x129\n" +
+	"\vreservation\x18\x01 \x01(\v2\x17.parking.v1.ReservationR\vreservation\x12:\n" +
+	"\fparking_spot\x18\x02 \x01(\v2\x17.parking.v1.ParkingSpotR\vparkingSpot\"T\n" +
+	"\x12ReleaseSpotRequest\x12%\n" +
+	"\x0ereservation_id\x18\x01 \x01(\tR\rreservationId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\"j\n" +
+	"\x13ReleaseSpotResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x129\n" +
+	"\vreservation\x18\x02 \x01(\v2\x17.parking.v1.ReservationR\vreservation2\xdd\b\n" +
+	"\x0eParkingService\x12]\n" +
+	"\x10CreateParkingLot\x12#.parking.v1.CreateParkingLotRequest\x1a$.parking.v1.CreateParkingLotResponse\x12T\n" +
+	"\rGetParkingLot\x12 .parking.v1.GetParkingLotRequest\x1a!.parking.v1.GetParkingLotResponse\x12]\n" +
+	"\x10UpdateParkingLot\x12#.parking.v1.UpdateParkingLotRequest\x1a$.parking.v1.UpdateParkingLotResponse\x12]\n" +
+	"\x10DeleteParkingLot\x12#.parking.v1.DeleteParkingLotRequest\x1a$.parking.v1.DeleteParkingLotResponse\x12Z\n" +
+	"\x0fListParkingLots\x12\".parking.v1.ListParkingLotsRequest\x1a#.parking.v1.ListParkingLotsResponse\x12`\n" +
+	"\x11CreateParkingSpot\x12$.parking.v1.CreateParkingSpotRequest\x1a%.parking.v1.CreateParkingSpotResponse\x12W\n" +
+	"\x0eGetParkingSpot\x12!.parking.v1.GetParkingSpotRequest\x1a\".parking.v1.GetParkingSpotResponse\x12`\n" +
+	"\x11UpdateParkingSpot\x12$.parking.v1.UpdateParkingSpotRequest\x1a%.parking.v1.UpdateParkingSpotResponse\x12`\n" +
+	"\x11DeleteParkingSpot\x12$.parking.v1.DeleteParkingSpotRequest\x1a%.parking.v1.DeleteParkingSpotResponse\x12]\n" +
+	"\x10ListParkingSpots\x12#.parking.v1.ListParkingSpotsRequest\x1a$.parking.v1.ListParkingSpotsResponse\x12N\n" +
+	"\vReserveSpot\x12\x1e.parking.v1.ReserveSpotRequest\x1a\x1f.parking.v1.ReserveSpotResponse\x12N\n" +
+	"\vReleaseSpot\x12\x1e.parking.v1.ReleaseSpotRequest\x1a\x1f.parking.v1.ReleaseSpotResponseB\xa6\x01\n" +
 	"\x0ecom.parking.v1B\fParkingProtoP\x01Z=github.com/Temych228/ap2_protos_go_final/parking/v1;parkingv1\xa2\x02\x03PXX\xaa\x02\n" +
 	"Parking.V1\xca\x02\n" +
 	"Parking\\V1\xe2\x02\x16Parking\\V1\\GPBMetadata\xea\x02\vParking::V1b\x06proto3"
@@ -1342,74 +1912,88 @@ func file_parking_v1_parking_proto_rawDescGZIP() []byte {
 	return file_parking_v1_parking_proto_rawDescData
 }
 
-var file_parking_v1_parking_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_parking_v1_parking_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_parking_v1_parking_proto_goTypes = []any{
-	(*GetAllParkingsRequest)(nil),    // 0: parking.v1.GetAllParkingsRequest
-	(*Parking)(nil),                  // 1: parking.v1.Parking
-	(*Spot)(nil),                     // 2: parking.v1.Spot
-	(*Tariff)(nil),                   // 3: parking.v1.Tariff
-	(*CreateParkingRequest)(nil),     // 4: parking.v1.CreateParkingRequest
-	(*GetParkingRequest)(nil),        // 5: parking.v1.GetParkingRequest
-	(*DeleteParkingRequest)(nil),     // 6: parking.v1.DeleteParkingRequest
-	(*ParkingResponse)(nil),          // 7: parking.v1.ParkingResponse
-	(*ParkingListResponse)(nil),      // 8: parking.v1.ParkingListResponse
-	(*CreateSpotRequest)(nil),        // 9: parking.v1.CreateSpotRequest
-	(*GetSpotRequest)(nil),           // 10: parking.v1.GetSpotRequest
-	(*GetSpotsByParkingRequest)(nil), // 11: parking.v1.GetSpotsByParkingRequest
-	(*UpdateSpotStatusRequest)(nil),  // 12: parking.v1.UpdateSpotStatusRequest
-	(*SpotActionRequest)(nil),        // 13: parking.v1.SpotActionRequest
-	(*DeleteSpotRequest)(nil),        // 14: parking.v1.DeleteSpotRequest
-	(*SpotResponse)(nil),             // 15: parking.v1.SpotResponse
-	(*SpotListResponse)(nil),         // 16: parking.v1.SpotListResponse
-	(*CreateTariffRequest)(nil),      // 17: parking.v1.CreateTariffRequest
-	(*GetTariffRequest)(nil),         // 18: parking.v1.GetTariffRequest
-	(*UpdateTariffRequest)(nil),      // 19: parking.v1.UpdateTariffRequest
-	(*CalculatePriceRequest)(nil),    // 20: parking.v1.CalculatePriceRequest
-	(*TariffResponse)(nil),           // 21: parking.v1.TariffResponse
-	(*CalculatePriceResponse)(nil),   // 22: parking.v1.CalculatePriceResponse
-	(*ActionResponse)(nil),           // 23: parking.v1.ActionResponse
+	(*ParkingLot)(nil),                // 0: parking.v1.ParkingLot
+	(*ParkingSpot)(nil),               // 1: parking.v1.ParkingSpot
+	(*Reservation)(nil),               // 2: parking.v1.Reservation
+	(*CreateParkingLotRequest)(nil),   // 3: parking.v1.CreateParkingLotRequest
+	(*CreateParkingLotResponse)(nil),  // 4: parking.v1.CreateParkingLotResponse
+	(*GetParkingLotRequest)(nil),      // 5: parking.v1.GetParkingLotRequest
+	(*GetParkingLotResponse)(nil),     // 6: parking.v1.GetParkingLotResponse
+	(*UpdateParkingLotRequest)(nil),   // 7: parking.v1.UpdateParkingLotRequest
+	(*UpdateParkingLotResponse)(nil),  // 8: parking.v1.UpdateParkingLotResponse
+	(*DeleteParkingLotRequest)(nil),   // 9: parking.v1.DeleteParkingLotRequest
+	(*DeleteParkingLotResponse)(nil),  // 10: parking.v1.DeleteParkingLotResponse
+	(*ListParkingLotsRequest)(nil),    // 11: parking.v1.ListParkingLotsRequest
+	(*ListParkingLotsResponse)(nil),   // 12: parking.v1.ListParkingLotsResponse
+	(*CreateParkingSpotRequest)(nil),  // 13: parking.v1.CreateParkingSpotRequest
+	(*CreateParkingSpotResponse)(nil), // 14: parking.v1.CreateParkingSpotResponse
+	(*GetParkingSpotRequest)(nil),     // 15: parking.v1.GetParkingSpotRequest
+	(*GetParkingSpotResponse)(nil),    // 16: parking.v1.GetParkingSpotResponse
+	(*UpdateParkingSpotRequest)(nil),  // 17: parking.v1.UpdateParkingSpotRequest
+	(*UpdateParkingSpotResponse)(nil), // 18: parking.v1.UpdateParkingSpotResponse
+	(*DeleteParkingSpotRequest)(nil),  // 19: parking.v1.DeleteParkingSpotRequest
+	(*DeleteParkingSpotResponse)(nil), // 20: parking.v1.DeleteParkingSpotResponse
+	(*ListParkingSpotsRequest)(nil),   // 21: parking.v1.ListParkingSpotsRequest
+	(*ListParkingSpotsResponse)(nil),  // 22: parking.v1.ListParkingSpotsResponse
+	(*ReserveSpotRequest)(nil),        // 23: parking.v1.ReserveSpotRequest
+	(*ReserveSpotResponse)(nil),       // 24: parking.v1.ReserveSpotResponse
+	(*ReleaseSpotRequest)(nil),        // 25: parking.v1.ReleaseSpotRequest
+	(*ReleaseSpotResponse)(nil),       // 26: parking.v1.ReleaseSpotResponse
+	(*timestamppb.Timestamp)(nil),     // 27: google.protobuf.Timestamp
 }
 var file_parking_v1_parking_proto_depIdxs = []int32{
-	1,  // 0: parking.v1.ParkingResponse.parking:type_name -> parking.v1.Parking
-	1,  // 1: parking.v1.ParkingListResponse.parkings:type_name -> parking.v1.Parking
-	2,  // 2: parking.v1.SpotResponse.spot:type_name -> parking.v1.Spot
-	2,  // 3: parking.v1.SpotListResponse.spots:type_name -> parking.v1.Spot
-	3,  // 4: parking.v1.TariffResponse.tariff:type_name -> parking.v1.Tariff
-	4,  // 5: parking.v1.ParkingService.CreateParking:input_type -> parking.v1.CreateParkingRequest
-	5,  // 6: parking.v1.ParkingService.GetParking:input_type -> parking.v1.GetParkingRequest
-	0,  // 7: parking.v1.ParkingService.GetAllParkings:input_type -> parking.v1.GetAllParkingsRequest
-	6,  // 8: parking.v1.ParkingService.DeleteParking:input_type -> parking.v1.DeleteParkingRequest
-	9,  // 9: parking.v1.ParkingService.CreateSpot:input_type -> parking.v1.CreateSpotRequest
-	10, // 10: parking.v1.ParkingService.GetSpot:input_type -> parking.v1.GetSpotRequest
-	11, // 11: parking.v1.ParkingService.GetSpotsByParking:input_type -> parking.v1.GetSpotsByParkingRequest
-	12, // 12: parking.v1.ParkingService.UpdateSpotStatus:input_type -> parking.v1.UpdateSpotStatusRequest
-	13, // 13: parking.v1.ParkingService.ReserveSpot:input_type -> parking.v1.SpotActionRequest
-	13, // 14: parking.v1.ParkingService.ReleaseSpot:input_type -> parking.v1.SpotActionRequest
-	14, // 15: parking.v1.ParkingService.DeleteSpot:input_type -> parking.v1.DeleteSpotRequest
-	17, // 16: parking.v1.ParkingService.CreateTariff:input_type -> parking.v1.CreateTariffRequest
-	18, // 17: parking.v1.ParkingService.GetTariff:input_type -> parking.v1.GetTariffRequest
-	19, // 18: parking.v1.ParkingService.UpdateTariff:input_type -> parking.v1.UpdateTariffRequest
-	20, // 19: parking.v1.ParkingService.CalculatePrice:input_type -> parking.v1.CalculatePriceRequest
-	7,  // 20: parking.v1.ParkingService.CreateParking:output_type -> parking.v1.ParkingResponse
-	7,  // 21: parking.v1.ParkingService.GetParking:output_type -> parking.v1.ParkingResponse
-	8,  // 22: parking.v1.ParkingService.GetAllParkings:output_type -> parking.v1.ParkingListResponse
-	23, // 23: parking.v1.ParkingService.DeleteParking:output_type -> parking.v1.ActionResponse
-	15, // 24: parking.v1.ParkingService.CreateSpot:output_type -> parking.v1.SpotResponse
-	15, // 25: parking.v1.ParkingService.GetSpot:output_type -> parking.v1.SpotResponse
-	16, // 26: parking.v1.ParkingService.GetSpotsByParking:output_type -> parking.v1.SpotListResponse
-	23, // 27: parking.v1.ParkingService.UpdateSpotStatus:output_type -> parking.v1.ActionResponse
-	23, // 28: parking.v1.ParkingService.ReserveSpot:output_type -> parking.v1.ActionResponse
-	23, // 29: parking.v1.ParkingService.ReleaseSpot:output_type -> parking.v1.ActionResponse
-	23, // 30: parking.v1.ParkingService.DeleteSpot:output_type -> parking.v1.ActionResponse
-	21, // 31: parking.v1.ParkingService.CreateTariff:output_type -> parking.v1.TariffResponse
-	21, // 32: parking.v1.ParkingService.GetTariff:output_type -> parking.v1.TariffResponse
-	23, // 33: parking.v1.ParkingService.UpdateTariff:output_type -> parking.v1.ActionResponse
-	22, // 34: parking.v1.ParkingService.CalculatePrice:output_type -> parking.v1.CalculatePriceResponse
-	20, // [20:35] is the sub-list for method output_type
-	5,  // [5:20] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	27, // 0: parking.v1.ParkingLot.created_at:type_name -> google.protobuf.Timestamp
+	27, // 1: parking.v1.ParkingLot.updated_at:type_name -> google.protobuf.Timestamp
+	27, // 2: parking.v1.ParkingSpot.created_at:type_name -> google.protobuf.Timestamp
+	27, // 3: parking.v1.ParkingSpot.updated_at:type_name -> google.protobuf.Timestamp
+	27, // 4: parking.v1.Reservation.starts_at:type_name -> google.protobuf.Timestamp
+	27, // 5: parking.v1.Reservation.ends_at:type_name -> google.protobuf.Timestamp
+	27, // 6: parking.v1.Reservation.created_at:type_name -> google.protobuf.Timestamp
+	27, // 7: parking.v1.Reservation.updated_at:type_name -> google.protobuf.Timestamp
+	0,  // 8: parking.v1.CreateParkingLotResponse.parking_lot:type_name -> parking.v1.ParkingLot
+	0,  // 9: parking.v1.GetParkingLotResponse.parking_lot:type_name -> parking.v1.ParkingLot
+	0,  // 10: parking.v1.UpdateParkingLotResponse.parking_lot:type_name -> parking.v1.ParkingLot
+	0,  // 11: parking.v1.ListParkingLotsResponse.parking_lots:type_name -> parking.v1.ParkingLot
+	1,  // 12: parking.v1.CreateParkingSpotResponse.parking_spot:type_name -> parking.v1.ParkingSpot
+	1,  // 13: parking.v1.GetParkingSpotResponse.parking_spot:type_name -> parking.v1.ParkingSpot
+	1,  // 14: parking.v1.UpdateParkingSpotResponse.parking_spot:type_name -> parking.v1.ParkingSpot
+	1,  // 15: parking.v1.ListParkingSpotsResponse.parking_spots:type_name -> parking.v1.ParkingSpot
+	27, // 16: parking.v1.ReserveSpotRequest.starts_at:type_name -> google.protobuf.Timestamp
+	27, // 17: parking.v1.ReserveSpotRequest.ends_at:type_name -> google.protobuf.Timestamp
+	2,  // 18: parking.v1.ReserveSpotResponse.reservation:type_name -> parking.v1.Reservation
+	1,  // 19: parking.v1.ReserveSpotResponse.parking_spot:type_name -> parking.v1.ParkingSpot
+	2,  // 20: parking.v1.ReleaseSpotResponse.reservation:type_name -> parking.v1.Reservation
+	3,  // 21: parking.v1.ParkingService.CreateParkingLot:input_type -> parking.v1.CreateParkingLotRequest
+	5,  // 22: parking.v1.ParkingService.GetParkingLot:input_type -> parking.v1.GetParkingLotRequest
+	7,  // 23: parking.v1.ParkingService.UpdateParkingLot:input_type -> parking.v1.UpdateParkingLotRequest
+	9,  // 24: parking.v1.ParkingService.DeleteParkingLot:input_type -> parking.v1.DeleteParkingLotRequest
+	11, // 25: parking.v1.ParkingService.ListParkingLots:input_type -> parking.v1.ListParkingLotsRequest
+	13, // 26: parking.v1.ParkingService.CreateParkingSpot:input_type -> parking.v1.CreateParkingSpotRequest
+	15, // 27: parking.v1.ParkingService.GetParkingSpot:input_type -> parking.v1.GetParkingSpotRequest
+	17, // 28: parking.v1.ParkingService.UpdateParkingSpot:input_type -> parking.v1.UpdateParkingSpotRequest
+	19, // 29: parking.v1.ParkingService.DeleteParkingSpot:input_type -> parking.v1.DeleteParkingSpotRequest
+	21, // 30: parking.v1.ParkingService.ListParkingSpots:input_type -> parking.v1.ListParkingSpotsRequest
+	23, // 31: parking.v1.ParkingService.ReserveSpot:input_type -> parking.v1.ReserveSpotRequest
+	25, // 32: parking.v1.ParkingService.ReleaseSpot:input_type -> parking.v1.ReleaseSpotRequest
+	4,  // 33: parking.v1.ParkingService.CreateParkingLot:output_type -> parking.v1.CreateParkingLotResponse
+	6,  // 34: parking.v1.ParkingService.GetParkingLot:output_type -> parking.v1.GetParkingLotResponse
+	8,  // 35: parking.v1.ParkingService.UpdateParkingLot:output_type -> parking.v1.UpdateParkingLotResponse
+	10, // 36: parking.v1.ParkingService.DeleteParkingLot:output_type -> parking.v1.DeleteParkingLotResponse
+	12, // 37: parking.v1.ParkingService.ListParkingLots:output_type -> parking.v1.ListParkingLotsResponse
+	14, // 38: parking.v1.ParkingService.CreateParkingSpot:output_type -> parking.v1.CreateParkingSpotResponse
+	16, // 39: parking.v1.ParkingService.GetParkingSpot:output_type -> parking.v1.GetParkingSpotResponse
+	18, // 40: parking.v1.ParkingService.UpdateParkingSpot:output_type -> parking.v1.UpdateParkingSpotResponse
+	20, // 41: parking.v1.ParkingService.DeleteParkingSpot:output_type -> parking.v1.DeleteParkingSpotResponse
+	22, // 42: parking.v1.ParkingService.ListParkingSpots:output_type -> parking.v1.ListParkingSpotsResponse
+	24, // 43: parking.v1.ParkingService.ReserveSpot:output_type -> parking.v1.ReserveSpotResponse
+	26, // 44: parking.v1.ParkingService.ReleaseSpot:output_type -> parking.v1.ReleaseSpotResponse
+	33, // [33:45] is the sub-list for method output_type
+	21, // [21:33] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_parking_v1_parking_proto_init() }
@@ -1423,7 +2007,7 @@ func file_parking_v1_parking_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_parking_v1_parking_proto_rawDesc), len(file_parking_v1_parking_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
